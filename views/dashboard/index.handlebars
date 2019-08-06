@@ -1,0 +1,97 @@
+<div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-6">
+      <div class="card shadow">
+        <div class="card-body">
+          <canvas id="grafico-trimestre">
+            <script>
+              var ctx = document.getElementById('grafico-trimestre').getContext('2d');
+              var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                  labels: ['Janeiro', 'Fevereiro', 'Março',],
+                  datasets: [{
+                    label: 'Primeiro Trimestre',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 36, 80)',
+                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                            }]
+                        },
+
+                          // Configuration options go here
+                          options: { }
+                        });
+            </script>
+          </canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card shadow">
+        <div class="card-body"><canvas id="grafico-semestre">
+            <script>
+              var ctx = document.getElementById('grafico-semestre').getContext('2d');
+              var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', ],
+                  datasets: [{
+                    label: 'Em dia',
+                    backgroundColor: 'rgb(0,255,128)',
+                    borderColor: 'rgb(0, 170, 85)',
+                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                            },
+                    {
+                    label: 'Inadimplente',
+                    backgroundColor: 'rgb(255,72,72)',
+                    borderColor: 'rgb(253, 0, 0)',
+                    data: [{{#each inadimplente}}{{valor}},{{/each}}]}]
+                        },
+
+                          // Configuration options go here
+                          options: { }
+                        });
+            </script>
+          </canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-12">
+      <div class="card shadow">
+        <div class="card-body">
+          <canvas id="myChart">
+            <script>
+              var ctx = document.getElementById('myChart').getContext('2d');
+              var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'line',
+
+                // The data for our dataset
+                data: {
+                  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                  datasets: [{
+                    label: 'Balanço mês-a-mês',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 36, 80)',
+                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                            }]
+                        },
+
+                          // Configuration options go here
+                          options: { }
+                        });
+            </script>
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,9 +3,9 @@ const mysql = require('mysql')
 //Configurações de acesso ao banco de dados
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'alexreis',
-    password: 'wacgr12345',
-    database: 'admcondominio'
+    user: 'root',
+    password: '',
+    database: 'admcondominio_test'
 })
 
 connection.connect((err)=>{

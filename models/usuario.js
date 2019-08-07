@@ -1,3 +1,4 @@
+//instanciando banco de dados
 const db = require('../config/connection')
 
 //funções crud usuario
@@ -5,9 +6,7 @@ async function listar() {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
             db.connection.query('SELECT * FROM usuario', (err, rows, fields)=>{
-                let string = JSON.stringify(rows)
-                let json = JSON.parse(string)
-                resolve(json)
+                resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)
         
@@ -19,9 +18,7 @@ async function listarUm(id) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
             db.connection.query(`SELECT * FROM usuario WHERE id='${id}'`, (err, rows, fields)=>{
-                let string = JSON.stringify(rows)
-                let json = JSON.parse(string)
-                resolve(json)
+                resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)
     })

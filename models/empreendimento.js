@@ -70,10 +70,8 @@ async function excluir(id) {
 async function calcular_ano(ano) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`SELECT SUM(VALOR) AS total FROM CONTA WHERE YEAR(DATAPAGAMENTO) = ${ano}`, (err, rows, fields)=>{
-                let string = JSON.stringify(rows)
-                let json = JSON.parse(string)
-                resolve(json)
+            db.connection.query(`SELECT SUM(VALOR) AS total FROM pagamento WHERE YEAR(DataPagamento) = ${ano}`, (err, rows, fields)=>{
+                resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)
         

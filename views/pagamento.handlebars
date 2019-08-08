@@ -1,9 +1,56 @@
-<div class="conteiner mt-5 mx-auto">
-    <div class="col-6 bg-my-color-2 rounded shadow-lg text-light" style="height: 300px;">
-        <form action="pagamento/boleto/" method="GET">
-        <label>id:</label>
-        <input type="text" class="form-control" id="nome" name="nome" placeholder="Inserir o nome" required>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-</form>
+ 
+ {{#each usuarios}} 
+   
+      <h3 class="mx-3 my-3">{{Nome}}</h3>      
+      <div class="d-flex justify-content-end mx-3 px-3">
+        <form action="boleto/" method="post">
+          <input type="hidden" name="id" id="id" value="{{IdUsuario}}">
+          <button class="btn btn-success" type="submit">Gerar</button></a>
+      </div>
+      <hr> 
+    
+ 
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Numero</th>
+      <th scope="col">Vencimento</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><a href=""><button class="btn btn-outline-success">Visualizar</button></a></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>{{nome}}</td>
+      <td>{{email}}</td>
+      <td></td>
+      <td><a href=""><button class="btn btn-outline-success">Visualizar</button></a></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>{{nome}}</td>
+      <td>{{email}}</td>
+      <td></td>
+      <td><a href=""><button class="btn btn-outline-success">Visualizar</button></a></td>
+    </tr>
+  </tbody>
+</table>
+{{else}}
+    <div class="conteiner mt-5 mx-auto">
+        <div class="col-6 bg-my-color-2 rounded shadow-lg text-light" style="height: 300px;">
+            <form action="/pagamento/user/" method="POST">
+            <label>id:</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Inserir o nome" required>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+        </div>
     </div>
-</div>
+{{/each}}

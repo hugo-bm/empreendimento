@@ -16,7 +16,8 @@
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
     "passport": "^0.4.0",
-    "popper.js": "^1.15.0"
+    "popper.js": "^1.15.0",
+    "request": "^2.88.0"
   },
   "devDependencies": {},
   "scripts": {
@@ -24,5 +25,14 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hugo-bm/emprendimento.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/hugo-bm/emprendimento/issues"
+  },
+  "homepage": "https://github.com/hugo-bm/emprendimento#readme"
 }

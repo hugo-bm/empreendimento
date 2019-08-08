@@ -8,31 +8,32 @@
     </div>
     <div class="row">
         <div class="col-6 bg-my-color-2 rounded shadow-lg text-light" style="height: 300px; overflow-y: scroll">
+                {{#each usuarios}}                                               {{!Button boleto é apenas para demonstração                 }}
                 <p>
-                {{#each clientes}}
-                <p>
-                    Id: {{IdCliente}} | Nome: {{Nome}} | E-mail: {{Email}}
+                    Id: {{IdUsuario}} | Nome: {{Nome}} | E-mail: {{Email}} <a href="/usuario/pagamento/{{IdUsuario}}" class="btn btn-primary">Boleto</a> | <a href="usuario/modificar/{{IdUsuario}}" class="btn btn-primary">Editar</a> | <a href="usuario/excluir/{{IdUsuario}}" class="btn btn-primary">Excluir</a>
                 </p>
                 {{/each}}
                 </p>
-                <p>
-                {{#each calculo}}
-                <p>
-                    Total primeiro trimestre 2020: R${{total}}
-                </p>
-                {{/each}}
-                </p>
+
         </div>
         <div class="col-6 bg-my-color-3 rounded  shadow-lg text-light">
-            <form action="/adicionar" method="post">
+            <form action="usuario/adicionar" method="post">
                 <legend class="text-center mt-4">Cadastrando Usuários</legend>
                 <label>Nome:</label>
                 <input type="text" class="form-control" id="nome" name="nome" placeholder="Inserir o nome" required>
                 <label>email:</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Inserir o email" required>
-                <button type="submit" class="btn btn-my-color-4 mt-4">Enviar</button>
+                <label>senha:</label>
+                <input type="password" class="form-control" id="senha" name="senha" placeholder="A senha deve conter 8 caracteres" maxlength="8" required>
+                <label>Apartamento </label>
+                <select class="form-control" name="apartamento" id="apartamento" required>
+                    {{#each apartamentos}}
+                    <option value="{{IdEmpreendimento}}">{{Apartamento}}</ooption>
+                    {{/each}}
+                </select>
+                
+                <button type="submit" class="btn btn-my-color-4 mt-4 mb-2">Enviar</button>
             </form>
         </div>
     </div>
-</div>
-
+</div>               

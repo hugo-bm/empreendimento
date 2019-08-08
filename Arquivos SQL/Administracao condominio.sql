@@ -1,3 +1,5 @@
+/*criando as tabelas*/
+
 CREATE TABLE Empreendimento (
   IdEmpreendimento INT PRIMARY KEY AUTO_INCREMENT,
   Nome VARCHAR(60) NOT NULL,
@@ -106,6 +108,8 @@ INSERT INTO Pagamento (DataPagamento, StatusPagamento, Id_Usuario, Id_Taxa) VALU
 ('2019-05-10','1', '25', '1'),
 ('2019-05-10','0', '26', '1'),
 ('2019-05-10','1', '17', '1');
+
+/*esboço das query*/
 
 
 select IdPagamento as código, DataPagamento, StatusPagamento, c.Nome, t.tipo from pagamento as p

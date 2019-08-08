@@ -1,0 +1,1 @@
+//Aqui vou implementar os helpers personalizados do handlebars.

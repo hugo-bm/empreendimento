@@ -1,0 +1,13 @@
+const boleto = require('./boleto')// temporario
+
+router.get('/pagamento',(req,res)=>{
+    res.render('listarUm')
+  })
+  router.get('/pagamento/boleto', (req,res)=>{
+    v()
+    async function v(){
+      let url =  [{url: await boleto("Hugo B. Moreno","222.222.222-22")}] // nome e cpf/cnpj 
+      console.log(url)
+      res.render('boleto',{iframe: url})
+    }   
+  })

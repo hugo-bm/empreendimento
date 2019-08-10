@@ -12,6 +12,7 @@ const flash = require('connect-flash')
 const fs = require('fs')
 const passport = require('passport')
 
+
 //Configurações
 //Sessão
 app.use(session({

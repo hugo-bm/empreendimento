@@ -26,6 +26,17 @@ router.get('/pagamento/:id',(req,res)=>{ // view dos boletos por usuário
     console.log(`erro ao listar: ${err}`)
   })
 })
+router.get('/pagamento/boleto/remessa', (req,res)=>{ 
+  
+ v()
+  
+  async function v(){
+    let file =   await boleto.boletoRemessa()
+    console.log(file.path)
+    //res.sendFile(file.path)
+  }   
+})
+
 
 router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um boleto 
   /*A pesquisa está aqui para obter os dados completos para a requisição*/
@@ -37,7 +48,7 @@ router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um bol
   })
   
   async function v(resultado){
-    let url =  [{url: await boleto(resultado[0].Nome,"222.222.222-22")}] // nome e cpf/cnpj 
+    let url =  [{url: await boleto.boletoGerar(resultado[0].Nome,"222.222.222-22")}] // nome e cpf/cnpj 
     console.log(url)
     res.render('boleto',{iframe: url})
   }   

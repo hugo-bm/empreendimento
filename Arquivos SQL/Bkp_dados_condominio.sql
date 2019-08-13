@@ -90,21 +90,21 @@ INSERT INTO Empreendimento VALUES
 
 /* moradores */
 
-INSERT INTO Usuario (Nome, Email, Senha, Id_Empreendimento) VALUES
-('Alex Reis', 'alex.reis@gmail.com', 'al3xal3x', '1'),
-('Leandro Barata', 'leandro.Barata@hotmail.com', 'b4r4t4', '2'),
-('Pedro Azeredo', 'pedro.azeredo@uol.com', 'p3dr0', '3'),
-('João Gonçalves', 'joao.goncalves@outlook.com', 'maozao', '4'),
-('Felipe Diniz', 'felipe.diniz@infraero.com', 'f3l1p3', '5'),
-('Fábio Tartaruga', 'fabio.tartaruga@gmail.com', 'pizza', '6'),
-('Alex Rodrigues', 'alex.rodrigues@terra.com.br', 'surubim', '7'),
-('Marcelo Cerrador', 'marcelo.cerrador@ig.com', 'chato', '8'),
-('David Mussel', 'david.mussel@disk.com', 'nadafaz', '9'),
-('Vinicius Araújo', 'vinicius.araujo@ilha.com.br', 'mulekpir', '10'),
-('André Pereira', 'andre.pereira@easy.com', 'zecascao', '11'),
-('Guilherme Loyola', 'guilherme.loyola@ziva.com', 'gmarra', '12'),
-('Regina Naked', 'regina.naked@chada.com.br', 'chata', '13'),
-('Kleber Rabelo', 'kleber.rabelo@coord.com', 'faznada', '14');
+INSERT INTO Usuario (Nome, Email, Senha, Id_Empreendimento,statusCliente) VALUES
+('Alex Reis', 'alex.reis@gmail.com', 'al3xal3x', '1', '1'),
+('Leandro Barata', 'leandro.Barata@hotmail.com', 'b4r4t4', '2', '1'),
+('Pedro Azeredo', 'pedro.azeredo@uol.com', 'p3dr0', '3', '1'),
+('João Gonçalves', 'joao.goncalves@outlook.com', 'maozao', '4', '1'),
+('Felipe Diniz', 'felipe.diniz@infraero.com', 'f3l1p3', '5', '1'),
+('Fábio Tartaruga', 'fabio.tartaruga@gmail.com', 'pizza', '6', '1'),
+('Alex Rodrigues', 'alex.rodrigues@terra.com.br', 'surubim', '7', '1'),
+('Marcelo Cerrador', 'marcelo.cerrador@ig.com', 'chato', '8', '1'),
+('David Mussel', 'david.mussel@disk.com', 'nadafaz', '9', '1'),
+('Vinicius Araújo', 'vinicius.araujo@ilha.com.br', 'mulekpir', '10', '1'),
+('André Pereira', 'andre.pereira@easy.com', 'zecascao', '11', '1'),
+('Guilherme Loyola', 'guilherme.loyola@ziva.com', 'gmarra', '12', '1'),
+('Regina Naked', 'regina.naked@chada.com.br', 'chata', '13', '1'),
+('Kleber Rabelo', 'kleber.rabelo@coord.com', 'faznada', '14', '1');
 
 /* taxas */
 

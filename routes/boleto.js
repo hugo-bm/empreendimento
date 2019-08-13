@@ -1,14 +1,16 @@
 const request = require('request')
 const boletoData = require('../config/paramsBoleto.json').form // Informações do boleto temporariamente em json
-const tokenBoleto = require('../config/paramsBoleto.json').token //Para implementação de segunda via
+const Pagamento = require('../models/pagamento')
+
 const hotsname = {gerar:'https://sandbox.boletocloud.com/api/v1/boletos',
 remessa: "https://sandbox.boletocloud.com/api/v1/arquivos/cnab/remessas"}
 const fs = require('fs')
-   async function boletoGerar(nome,cpf){      
+   async function boletoGerar(nome,cpf, id){      
         // econde usuario("ApiKey"):senha("token") para Base64
     let data = "api-key_hN01ncTdpzWMC2TKI1-dBUCZnaLH4YFVACpyW2lJIAs=:token";
     let emBase64 = new Buffer.from(data).toString('base64');
-    let dataEmissao = await emiDate()
+    let dataEmissao = await emiDate();
+    let dataVencimento = await venciDate();
    // let num = await numBoleto()        
     let requisicao = new Promise((resolve, reject)=>{
         setTimeout(()=>{
@@ -21,7 +23,7 @@ const fs = require('fs')
                     "boleto.conta.token": "api-key_RPu53r0yE9LSj2ImqbJYbeJYrph45hHdXKUkWrye9DU=",
                    // "boleto.conta.banco":"237",
                    // "boleto.conta.agencia":"1234-5",
-                  //  "boleto.conta.numero": "123456-0",    
+                   // "boleto.conta.numero": "123456-0",    
                    // "boleto.conta.carteira": 12,
                    // "boleto.beneficiario.nome": "CessaBit Tech",
                    // "boleto.beneficiario.cprf": "15.719.277/0001-46",
@@ -30,14 +32,14 @@ const fs = require('fs')
                    // "boleto.beneficiario.endereco.localidade": "Natal",
                    // "boleto.beneficiario.endereco.bairro": "Petrópolis",
                    // "boleto.beneficiario.endereco.logradouro": "Avenida Hermes da Fonseca",
-                    //"boleto.beneficiario.endereco.numero": "384",
+                   // "boleto.beneficiario.endereco.numero": "384",
                    // "boleto.beneficiario.endereco.complemento": "Sala 2A, segundo andar",
                     "boleto.emissao": dataEmissao,
-                    "boleto.vencimento": "2020-05-30",
+                    "boleto.vencimento": dataVencimento,
                     "boleto.documento": "EX1",
                     //"boleto.numero": num,
                     "boleto.titulo": "DM",
-                    "boleto.valor": "25000.99",
+                    "boleto.valor": "350.49",
                     "boleto.pagador.nome": nome,
                     "boleto.pagador.cprf": cpf,
                     "boleto.pagador.endereco.cep":"36240-000",
@@ -61,14 +63,16 @@ const fs = require('fs')
                 if (response.statusCode != 201) {
                     console.log(response.body)
                 }
-                console.log(response.headers['x-boletocloud-token'])
-                let boleto =   'https://sandbox.boletocloud.com/boleto/2via/' + response.headers['x-boletocloud-token']
-            //console.log(boleto)
-            resolve(boleto);
+                else{//Pagamento.adicionar( Token, Data de Emisão, Data de Vencimento, Status Do Pagamento, Id_Usuario, Id_Taxa)
+                    Pagamento.adicionar(response.headers['x-boletocloud-token'], dataEmissao, dataVencimento, 0, id, 1)
+                    console.log(response.headers['x-boletocloud-token'])
+                    let boleto =   'https://sandbox.boletocloud.com/boleto/2via/' + response.headers['x-boletocloud-token']
+                    resolve(boleto);
+                }
             })
         }, 80)
     }
-    )   
+    )  
     
     return requisicao
 }
@@ -77,7 +81,6 @@ async function boletoRemessa(){
         // econde usuario("ApiKey"):senha("token") para Base64
     let data = "api-key_hN01ncTdpzWMC2TKI1-dBUCZnaLH4YFVACpyW2lJIAs=:token";
     let emBase64 = new Buffer.from(data).toString('base64');
-
     let requisicao = new Promise((resolve, reject)=>{
         setTimeout(()=>{
             request({
@@ -96,12 +99,11 @@ async function boletoRemessa(){
                     console.log(`statusCode: ${response.statusCode}`)// status da requisição (201: concluido com sucesso!)
                 
                     if (response.statusCode != 204) {                    
-                
                         console.log(response.headers['x-boletocloud-token'])// Token da remessa
                         let fileName = response.headers["content-disposition"].replace('inline; filename=','')//Nome do arquivo
-                        let filePath = `./remessas/${filename}`;
+                        let filePath = `./remessas/${fileName}`;
                         fs.writeFileSync(filePath, response.body);
-                        let remessa = {path: filePath,name: fileName }
+                        let remessa = {path: filePath, nome: fileName }
                         console.log(remessa)
                         resolve(remessa);
                     }
@@ -120,20 +122,20 @@ async function emiDate() {
         month = '' + (data.getMonth() + 1),
         day = '' + data.getDate(),
         year = data.getFullYear();
-
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
-
     return [year, month, day].join('-');
 }
-//Gerando número aleatório para o boleto
- async function numBoleto(){
-    let num = ''
-    for(let cont=0;cont < 11; cont++){
-      num +=  + Math.floor(Math.random() * (9 - 0 + 1)) + 0;  
-    }
-    return (num +'-P')
- }
+async function venciDate() {
+    let data = new Date(),
+        month = '' + (data.getMonth() + 2),
+        day = '' + data.getDate(),
+        year = data.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+}
+
   
  
 module.exports = {boletoGerar,boletoRemessa}

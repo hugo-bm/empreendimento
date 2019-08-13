@@ -12,8 +12,10 @@ CREATE TABLE Usuario (
   Nome VARCHAR(60) NOT NULL,
   Email VARCHAR(80) NOT NULL UNIQUE,
   Senha VARCHAR(8) NOT NULL,
+  Cpf VARCHAR(20) NOT NULL UNIQUE,
   DataCadastro DATETIME NOT NULL DEFAULT NOW(),
-  Id_Empreendimento INT NOT NULL
+  Id_Empreendimento INT NOT NULL,
+  statusCliente INT NOT NULL
 );
 
 CREATE TABLE Taxa (
@@ -26,7 +28,9 @@ CREATE TABLE Taxa (
 
 CREATE TABLE Pagamento (
   IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
-  DataPagamento DATETIME NOT NULL DEFAULT NOW(),
+  Token VARCHAR(60) NOT NULL,
+  DataEmissao DATETIME NOT NULL DEFAULT NOW(),
+  DataVencimento DATETIME NOT NULL DEFAULT NOW(),
   StatusPagamento BOOLEAN NOT NULL,
   Id_Usuario INT NOT NULL,
   Id_Taxa INT NOT NULL
@@ -61,21 +65,21 @@ INSERT INTO Empreendimento VALUES
 
 /*Inserindo dados do cliente*/
 
-INSERT INTO Usuario (Nome, Email, Senha, Id_Empreendimento) VALUES
-('Alex Reis', 'alex.reis@gmail.com', 'al3xal3x', '1'),
-('Leandro Barata', 'leandro.Barata@hotmail.com', 'b4r4t4', '2'),
-('Pedro Azeredo', 'pedro.azeredo@uol.com', 'p3dr0', '3'),
-('João Gonçalves', 'joao.goncalves@outlook.com', 'maozao', '4'),
-('Felipe Diniz', 'felipe.diniz@infraero.com', 'f3l1p3', '5'),
-('Fábio Tartaruga', 'fabio.tartaruga@gmail.com', 'pizza', '6'),
-('Alex Rodrigues', 'alex.rodrigues@terra.com.br', 'surubim', '7'),
-('Marcelo Cerrador', 'marcelo.cerrador@ig.com', 'chato', '8'),
-('David Mussel', 'david.mussel@disk.com', 'nadafaz', '9'),
-('Vinicius Araújo', 'vinicius.araujo@ilha.com.br', 'mulekpir', '10'),
-('André Pereira', 'andre.pereira@easy.com', 'zecascao', '11'),
-('Guilherme Loyola', 'guilherme.loyola@ziva.com', 'gmarra', '12'),
-('Regina Naked', 'regina.naked@chada.com.br', 'chata', '13'),
-('Kleber Rabelo', 'kleber.rabelo@coord.com', 'faznada', '14');
+INSERT INTO Usuario (Nome, Email, Senha, CPf, Id_Empreendimento) VALUES
+('Alex Reis', 'alex.reis@gmail.com', 'al3xal3x', '111.111.111-11', '1'),
+('Leandro Barata', 'leandro.Barata@hotmail.com', 'b4r4t4', '222.222.222-22', '2'),
+('Pedro Azeredo', 'pedro.azeredo@uol.com', 'p3dr0', '333.333.333-03', '3'),
+('João Gonçalves', 'joao.goncalves@outlook.com', 'maozao', '444.444.444-44', '4'),
+('Felipe Diniz', 'felipe.diniz@infraero.com', 'f3l1p3', '555.555.555-55', '5'),
+('Fábio Tartaruga', 'fabio.tartaruga@gmail.com', 'pizza', '666.666.666-66', '6'),
+('Alex Rodrigues', 'alex.rodrigues@terra.com.br', 'surubim', '666.555.666-67', '7'),
+('Marcelo Cerrador', 'marcelo.cerrador@ig.com', 'chato', '777.999.333-58', '8'),
+('David Mussel', 'david.mussel@disk.com', 'nadafaz', '666.333.555-39', '9'),
+('Vinicius Araújo', 'vinicius.araujo@ilha.com.br', 'mulekpir', '222.666.222-10', '10'),
+('André Pereira', 'andre.pereira@easy.com', 'zecascao', '333.232.636-11', '11'),
+('Guilherme Loyola', 'guilherme.loyola@ziva.com', 'gmarra', '333.636.566-12', '12'),
+('Regina Naked', 'regina.naked@chada.com.br', 'chata', '012.333.235-13', '13'),
+('Kleber Rabelo', 'kleber.rabelo@coord.com', 'faznada', '102.247.377-13', '14');
 
 
 /*Insedindo dados das taxas*/
@@ -84,8 +88,8 @@ INSERT INTO Taxa (Tipo, Valor) VALUES
 ('condominio', '280.00'),
 ('servico', '280.00');
 
-INSERT INTO Pagamento (DataPagamento, StatusPagamento, Id_Usuario, Id_Taxa) VALUES
-('2019-05-10','0', '16', '1'),
+INSERT INTO Pagamento ( Token, DataEmissao, DataVencimento, StatusPagamento, Id_Usuario, Id_Taxa) VALUES
+('zxpkVRJXCo4MltMR_ce92mdSGWxFzyYXT1v-X88iKz4=','2019-08-10', '2020-05-30','0', '1', '1'),
 ('2019-05-10','1', '17', '1'),
 ('2019-05-10','0', '18', '1'),
 ('2019-05-10','1', '19', '1'),

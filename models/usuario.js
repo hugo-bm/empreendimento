@@ -25,10 +25,10 @@ async function listarUm(id) {
     return usuario
 }
 
-async function adicionar(nome, email, senha, apartamento) {
+async function adicionar(nome, email, senha, cpf, apartamento) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`INSERT INTO usuario (Nome, Email, Senha, Id_Empreendimento) VALUES ('${nome}', '${email}', '${senha}', '${apartamento}')`, (err, result)=>{
+            db.connection.query(`INSERT INTO usuario (Nome, Email, Senha, Cpf, Id_Empreendimento) VALUES ('${nome}', '${email}', '${senha}', '${cpf}','${apartamento}')`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao cadastrar ${err}`)
                 }

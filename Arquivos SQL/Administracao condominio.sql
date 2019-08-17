@@ -1,3 +1,5 @@
+/*Configurando Idioma*/
+SET lc_time_names = 'pt_BR'; 
 /*criando as tabelas*/
 
 CREATE TABLE Empreendimento (
@@ -11,8 +13,8 @@ CREATE TABLE Usuario (
   IdUsuario INT PRIMARY KEY AUTO_INCREMENT,
   Nome VARCHAR(60) NOT NULL,
   Email VARCHAR(80) NOT NULL UNIQUE,
-  Senha VARCHAR(8) NOT NULL,
-  Cpf VARCHAR(20) NOT NULL UNIQUE,
+  Senha VARCHAR(60) NOT NULL,
+  Cpf VARCHAR(20) NOT NULL ,/*Colocar como unique na produção*/
   DataCadastro DATETIME NOT NULL DEFAULT NOW(),
   Id_Empreendimento INT NOT NULL,
   statusCliente INT NOT NULL
@@ -29,8 +31,9 @@ CREATE TABLE Taxa (
 CREATE TABLE Pagamento (
   IdPagamento INT PRIMARY KEY AUTO_INCREMENT,
   Token VARCHAR(60) NOT NULL,
-  DataEmissao DATETIME NOT NULL DEFAULT NOW(),
-  DataVencimento DATETIME NOT NULL DEFAULT NOW(),
+  DataEmissao DATETIME NOT NULL ,/*Sem default now*/
+  DataVencimento DATETIME NOT NULL, /*Sem default now*/
+  DataPagamento DATETIME NOT NULL DEFAULT NOW(),
   StatusPagamento BOOLEAN NOT NULL,
   Id_Usuario INT NOT NULL,
   Id_Taxa INT NOT NULL

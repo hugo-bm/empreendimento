@@ -5,7 +5,7 @@
       <div class="d-flex justify-content-end mx-3 px-3">
         <form action="boleto/" method="post">
           <input type="hidden" name="id" id="id" value="{{IdUsuario}}">
-          <button class="btn btn-success" type="submit">Gerar</button></a>
+          <button class="btn btn-primary"  type="submit">Gerar Boleto</button></a>
       </div>
 {{else}}
     
@@ -24,17 +24,39 @@
     <tbody>
       
         {{#each boletos}}
-          <tr> 
-            <th scope="row">1</th>     
+        <!-- ADD mês do pagamento  e cor de fundo-->
+          <tr id="{{DataVencimento}}{{IdPagamento}}">            
+            <th scope="row" id="{{{DataEmissao}}}{{IdPagamento}}"><script>              
+              this.document.getElementById('{{{DataEmissao}}}{{IdPagamento}}').innerText = '' + (new Date('{{{DataEmissao}}}').getUTCMonth() + 1);
+            </script></th>     
             <td>{{{DataEmissao}}}</td>
             <td>{{DataVencimento}}</td>
             <td id='{{IdPagamento}}'>
-              <Script>            
-              this.document.getElementById('{{IdPagamento}}').innerText = {{StatusPagamento}} == 0 ? 'Aguardando Pagamento' : 'Pago';          
+              <Script>  
+                let cor{{IdPagamento}} ='';
+                let texto{{IdPagamento}} = '';
+                if({{StatusPagamento}} == 1)
+                  {
+                    cor{{IdPagamento}} = '#28a733b9';
+                    texto{{IdPagamento}} = 'Pago'
+                  }
+                else{
+                    if({{tempoAtraso}} >= 0)
+                      {
+                        cor{{IdPagamento}} = '#dc3545';
+                        texto{{IdPagamento}} = 'Em atraso'
+                      }else{
+                        texto{{IdPagamento}} = 'Aguardando Pagamento'
+                      }
+                  }
+                this.document.getElementById('{{IdPagamento}}').innerText = texto{{IdPagamento}}
+                this.document.getElementById('{{DataVencimento}}{{IdPagamento}}').style.backgroundColor = cor{{IdPagamento}};
+               
               </Script>
             </td>          
-            <td><a href="/usuario/pagamento/boleto/{{Token}}" class="btn btn-outline-success">Visualizar</a></a></td>
+            <td><a href="/usuario/pagamento/boleto/{{Token}}" class="btn btn-outline-primary">Visualizar</a></td>
           </tr>
+         
         {{else}}
           <h4>Ainda não há pagamentos disponíveis</h4>
         

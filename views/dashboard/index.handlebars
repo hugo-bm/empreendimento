@@ -1,3 +1,10 @@
+<script>
+  // Posicionando os valores saldoTotal
+  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0]
+              {{#each saldoTotal}}              
+                mesValorTotal[{{mes}}-1] = {{valor}}              
+               {{/each}}
+</script>
 <div class="container-fluid">
  
   <div class="row mt-4">
@@ -33,7 +40,13 @@
     <div class="col-6">
       <div class="card shadow">
         <div class="card-body"><canvas id="grafico-semestre">
-            <script>
+            <script>              
+               // Posicionando os valores Inadimplentes
+               let mesInadimplente = [0,0,0,0,0,0,0,0,0,0,0,0]
+              {{#each inadimplente}}              
+                mesInadimplente[{{mes}}-1] = {{valor}}              
+               {{/each}}
+              
               var ctx = document.getElementById('grafico-semestre').getContext('2d');
               var chart = new Chart(ctx, {
                 // The type of chart we want to create
@@ -41,18 +54,19 @@
 
                 // The data for our dataset
                 data: {
-                  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', ],
+                  labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                   datasets: [{
                     label: 'Em dia',
                     backgroundColor: 'rgb(0,255,128)',
                     borderColor: 'rgb(0, 170, 85)',
-                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                    data: mesValorTotal
                             },
                     {
                     label: 'Inadimplente',
                     backgroundColor: 'rgb(255,72,72)',
                     borderColor: 'rgb(253, 0, 0)',
-                    data: [{{#each inadimplente}}{{valor}},{{/each}}]}]
+                    data: mesInadimplente
+                          }]
                         },
 
                           // Configuration options go here
@@ -65,11 +79,12 @@
   </div>
 
   <div class="row mt-2 mb-4">
-    <div class="col-12">
+    <div class="col-8">
       <div class="card shadow">
         <div class="card-body">
           <canvas id="myChart">
-            <script>
+            <script>              
+               
               var ctx = document.getElementById('myChart').getContext('2d');
               var chart = new Chart(ctx, {
                 // The type of chart we want to create
@@ -82,7 +97,7 @@
                     label: 'Balanço mês-a-mês',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 36, 80)',
-                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                    data: mesValorTotal
                             }]
                         },
 
@@ -94,5 +109,29 @@
         </div>
       </div>
     </div>
+    <!--Inicio Campo Rank de Inadimplentes -->
+
+    <div class="col-4">
+      <div class="card shadow">
+        <di class="card-header-inadi">
+          <h2 class="card-title">Rank de Inadimplentes</h2>          
+          <h5 class="text-center card-subtitle">Nome | Tempo de atraso | contato</h5>
+        </di>
+        <div class="card-body">         
+            <div class="list-group list-group-scroll">
+              {{#each rank}}
+                <div class="list-group-item list-group-item-action">
+                  {{nome}}  <b class="text-danger">{{tempoAtraso}}</b> dias <a href="mailto:{{email}}"><small>{{email}}</small></a>
+                </div>
+              {{else}}
+              <h2>Não há moradores Inadimplentes</h2>
+              {{/each}} 
+            </div>  
+        <!--Fim Campo Rank de Inadimplentes -->            
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+  

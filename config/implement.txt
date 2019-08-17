@@ -1,13 +1,70 @@
-const boleto = require('./boleto')// temporario
 
-router.get('/pagamento',(req,res)=>{
-    res.render('listarUm')
-  })
-  router.get('/pagamento/boleto', (req,res)=>{
-    v()
-    async function v(){
-      let url =  [{url: await boleto("Hugo B. Moreno","222.222.222-22")}] // nome e cpf/cnpj 
-      console.log(url)
-      res.render('boleto',{iframe: url})
-    }   
-  })
+!!!! alteração do pagamneto.handlebars !!!!
+<tr id="{{DataVencimento}}{{IdPagamento}}">            
+            <th scope="row" id="{{{DataEmissao}}}{{IdPagamento}}"><script>              
+              this.document.getElementById('{{{DataEmissao}}}{{IdPagamento}}').innerText = '' + (new Date('{{{DataEmissao}}}').getUTCMonth() + 1);
+            </script></th>     
+            <td>{{{DataEmissao}}}</td>
+            <td>{{DataVencimento}}</td>
+            <td id='{{IdPagamento}}'>
+              <Script>  
+                let cor{{IdPagamento}} ='';
+                let texto{{IdPagamento}} = '';
+                if({{StatusPagamento}} == 1)
+                  {
+                    cor{{IdPagamento}} = '#28a733b9';
+                    texto{{IdPagamento}} = 'Pago'
+                  }
+                else{
+                    if({{StatusPagamento}} == 2)
+                      {
+                        cor{{IdPagamento}} = '#dc3545';
+                        texto{{IdPagamento}} = 'Em atraso'
+                      }else{
+                        texto{{IdPagamento}} = 'Aguardando Pagamento'
+                      }
+                  }
+                this.document.getElementById('{{IdPagamento}}').innerText = texto{{IdPagamento}}
+                this.document.getElementById('{{DataVencimento}}{{IdPagamento}}').style.backgroundColor = cor{{IdPagamento}};
+               
+              </Script>
+            </td>          
+            <td><a href="/usuario/pagamento/boleto/{{Token}}" class="btn btn-outline-primary">Visualizar</a></td>
+          </tr>
+
+!!!! alteração do style.css (final do código!) !!!!
+/*meu codigo pra baixo*/
+.btn-outline-login {
+  color: #fff;
+  border-color: #fff;
+  border: 2px solid #fff;
+  min-width: 35px;
+  width: 45%;
+  max-width: 240px;
+}
+
+.input-login{
+  border-width: 0 0 1px 0;
+  border-color: #fff;
+  background: none;
+  display: inline-block;
+  margin: 20px auto;
+  margin-bottom: 0;  
+  text-align: left;  
+  padding: 14px 10px;
+  width: 66%;
+  outline: none;
+  color: #fff;  
+  transition: 0.25s;
+}
+
+.btn-outline-login:hover {
+  color: var(--my-color-2);
+  background-color: #fff;
+  border-color: #fff;
+}
+
+!!!! alteração do main.handlebars (Colocar no head) !!!!
+
+<!-- Alteração add icons -->
+  <script src="https://kit.fontawesome.com/6c82e4d590.js"></script>

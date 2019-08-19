@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13/08/2019 às 04:14
+-- Tempo de geração: 19/08/2019 às 18:15
 -- Versão do servidor: 5.6.15-log
 -- Versão do PHP: 5.5.8
 
@@ -19,14 +19,13 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `condominio`
 --
+CREATE DATABASE IF NOT EXISTS `condominio` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `condominio`;
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura para tabela `empreendimento`
---
--- Criação: 12/08/2019 às 01:36
--- Última atualização: 12/08/2019 às 01:36
 --
 
 CREATE TABLE IF NOT EXISTS `empreendimento` (
@@ -132,49 +131,54 @@ INSERT INTO `empreendimento` (`IdEmpreendimento`, `Nome`, `Bloco`, `Apartamento`
 --
 -- Estrutura para tabela `pagamento`
 --
--- Criação: 13/08/2019 às 00:54
--- Última atualização: 13/08/2019 às 00:54
---
 
 CREATE TABLE IF NOT EXISTS `pagamento` (
   `IdPagamento` int(11) NOT NULL AUTO_INCREMENT,
   `Token` varchar(60) NOT NULL,
-  `DataEmissao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `DataVencimento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataEmissao` datetime NOT NULL,
+  `DataVencimento` datetime NOT NULL,
   `DataPagamento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `StatusPagamento` tinyint(1) NOT NULL,
+  `StatusPagamento` int(11) NOT NULL,
   `Id_Usuario` int(11) NOT NULL,
   `Id_Taxa` int(11) NOT NULL,
-  PRIMARY KEY (`IdPagamento`),
-  KEY `FK_PagamentoUsuario` (`Id_Usuario`),
-  KEY `FK_PagamentoTaxa` (`Id_Taxa`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+  PRIMARY KEY (`IdPagamento`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Fazendo dump de dados para tabela `pagamento`
 --
 
 INSERT INTO `pagamento` (`IdPagamento`, `Token`, `DataEmissao`, `DataVencimento`, `DataPagamento`, `StatusPagamento`, `Id_Usuario`, `Id_Taxa`) VALUES
-(1, 'zxpkVRJXCo4MltMR_ce92mdSGWxFzyYXT1v-X88iKz4=', '2019-08-10', '2019-08-30 ', '2019-08-12 21:54:08', 0, 1, 1),
-(2, 'z_dRoLOTf8hh6AJak8UV_8sw-hI70oenEEPquTG4TJU=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 1, 1),
-(3, 'jyD-7m-tTXS9X3aKXnJobVdlBHv7Ou-D6zNX-vbZ1_g=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 0, 1),
-(4, '2b8s22uO8695RlmznSBEXUzsmehxDYS8EN1nk2OEO38=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 0, 2, 1),
-(5, 'M7Tov4VF1I8ZFVhbjEVpE7FTMsYFx9cwXIbAB61LOsA=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 0, 2, 1),
-(6, 'tRQrtG1AXil4pwc8fx-fSPpAxZ8Vt2JfxVFgXT1nFzI=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 0, 1, 1),
-(7, 'VsNzLvwBX3jNKhd8sfvK1P4R4udWdPdsauW-Zr-TRz0=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 1, 1),
-(8, '3kWaTRAVXTpc3FcBVLQmBb7z4iOvu58EAdefdIqAAuw=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 0, 1, 1),
-(9, 'xqs5ECTbSBzpQv4O7vFkyxTxjmB9lYz_fMK61_63T1g=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 1, 1),
-(10, 'Z0UHIXgks4_D4tTpwbYTWkjlkqWNqwv1rh6Y44b-xPc=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 2, 1),
-(11, 'VFq3DA4Z7w6zTgJmWq2_NTBp8GEDJPFZnXzX0a0wTrs=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 2, 1),
-(12, 'Ur8tIQwxMG4tMqXEdB54eIqwsaLnRSQMf9zkb486A7A=', '2019-08-12 ', '2019-09-12 ', '2019-08-12 21:54:08', 1, 1, 1);
+(1, 'zxpkVRJXCo4MltMR_ce92mdSGWxFzyYXT1v-X88iKz4=', '2019-08-10 00:00:00', '2019-08-30 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(2, 'z_dRoLOTf8hh6AJak8UV_8sw-hI70oenEEPquTG4TJU=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(3, 'jyD-7m-tTXS9X3aKXnJobVdlBHv7Ou-D6zNX-vbZ1_g=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 2, 0, 1),
+(4, '2b8s22uO8695RlmznSBEXUzsmehxDYS8EN1nk2OEO38=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 0, 2, 1),
+(5, 'M7Tov4VF1I8ZFVhbjEVpE7FTMsYFx9cwXIbAB61LOsA=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 2, 2, 1),
+(6, 'tRQrtG1AXil4pwc8fx-fSPpAxZ8Vt2JfxVFgXT1nFzI=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(7, 'VsNzLvwBX3jNKhd8sfvK1P4R4udWdPdsauW-Zr-TRz0=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 2, 1, 1),
+(8, '3kWaTRAVXTpc3FcBVLQmBb7z4iOvu58EAdefdIqAAuw=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(9, 'xqs5ECTbSBzpQv4O7vFkyxTxjmB9lYz_fMK61_63T1g=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(10, 'Z0UHIXgks4_D4tTpwbYTWkjlkqWNqwv1rh6Y44b-xPc=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 2, 1),
+(11, 'VFq3DA4Z7w6zTgJmWq2_NTBp8GEDJPFZnXzX0a0wTrs=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 2, 1),
+(12, 'Ur8tIQwxMG4tMqXEdB54eIqwsaLnRSQMf9zkb486A7A=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(13, '7dGNmTJRAwYBHvUErKHg9IKWtbq4EfGM2bv3nY33D9g=', '2019-08-15 00:00:00', '2019-09-15 00:00:00', '2019-08-15 15:15:04', 0, 1, 1),
+(14, 'zxpkVRJXCo4MltMR_ce92mdSGWxFzyYXT1v-X88iKz4=', '2019-09-10 00:00:00', '2019-10-30 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(15, 'z_dRoLOTf8hh6AJak8UV_8sw-hI70oenEEPquTG4TJU=', '2019-09-12 00:00:00', '2019-10-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(16, 'jyD-7m-tTXS9X3aKXnJobVdlBHv7Ou-D6zNX-vbZ1_g=', '2019-09-12 00:00:00', '2019-10-12 00:00:00', '2019-08-12 21:54:08', 1, 0, 1),
+(17, '2b8s22uO8695RlmznSBEXUzsmehxDYS8EN1nk2OEO38=', '2019-09-12 00:00:00', '2019-10-15 00:00:00', '2019-08-12 21:54:08', 0, 2, 1),
+(18, 'M7Tov4VF1I8ZFVhbjEVpE7FTMsYFx9cwXIbAB61LOsA=', '2019-09-12 00:00:00', '2019-10-15 00:00:00', '2019-08-12 21:54:08', 0, 2, 1),
+(19, 'tRQrtG1AXil4pwc8fx-fSPpAxZ8Vt2JfxVFgXT1nFzI=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(20, 'VsNzLvwBX3jNKhd8sfvK1P4R4udWdPdsauW-Zr-TRz0=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(21, '3kWaTRAVXTpc3FcBVLQmBb7z4iOvu58EAdefdIqAAuw=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
+(22, 'xqs5ECTbSBzpQv4O7vFkyxTxjmB9lYz_fMK61_63T1g=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
+(23, 'Z0UHIXgks4_D4tTpwbYTWkjlkqWNqwv1rh6Y44b-xPc=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 1, 2, 1),
+(24, 'VFq3DA4Z7w6zTgJmWq2_NTBp8GEDJPFZnXzX0a0wTrs=', '2019-10-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 1, 2, 1),
+(25, 'Ur8tIQwxMG4tMqXEdB54eIqwsaLnRSQMf9zkb486A7A=', '2019-01-12 00:00:00', '2019-11-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estrutura para tabela `taxa`
---
--- Criação: 12/08/2019 às 01:37
--- Última atualização: 12/08/2019 às 01:38
 --
 
 CREATE TABLE IF NOT EXISTS `taxa` (
@@ -198,9 +202,6 @@ INSERT INTO `taxa` (`IdTaxa`, `Tipo`, `Valor`, `Descricao`, `DataCadastro`) VALU
 --
 -- Estrutura para tabela `usuario`
 --
--- Criação: 12/08/2019 às 12:29
--- Última atualização: 12/08/2019 às 20:26
---
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `IdUsuario` int(11) NOT NULL AUTO_INCREMENT,
@@ -212,8 +213,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Id_Empreendimento` int(11) NOT NULL,
   `statusCliente` int(11) NOT NULL,
   PRIMARY KEY (`IdUsuario`),
-  UNIQUE KEY `Email` (`Email`),
-  UNIQUE KEY `Cpf` (`Cpf`)
+  UNIQUE KEY `Email` (`Email`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --

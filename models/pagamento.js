@@ -87,16 +87,20 @@ async function calcular_ano(ano) {
   return pagamento
 }
 
-async function calcularAno(ano) {
+async function calcularAno(ano) {// Modificado para verificar o trimestre e o valor por mês em determinado ano
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`SELECT year(p.DataEmissao) as 'ano', month(p.DataEmissao) as 'mes', sum(t.Valor) as 'valor'
-      from Taxa as t
-      join Pagamento as p
-      on t.IdTaxa = p.Id_Taxa
-      where year(p.DataEmissao) = ${ano} and p.statusPagamento = 1
-      group by ano, mes
-      order by ano, mes asc;`, (err, rows, fields) => {
+      db.connection.query(`SELECT QUARTER(p.DataEmissao)  AS 'trimestre', QUARTER(CURDATE())  AS 'trimestreAtual', 
+      CASE WHEN MONTH(p.DataEmissao) in (1,4,7,10) THEN 0 
+         WHEN MONTH(p.DataEmissao) in (2,5,8,11) THEN 1 
+         WHEN MONTH(p.DataEmissao) in (3,6,9,12) THEN 2 
+         END AS ordemTrimestre,year(p.DataEmissao) as 'ano', month(p.DataEmissao) as 'mes', sum(t.Valor) as 'valor'
+    from Taxa as t
+    join Pagamento as p
+    on t.IdTaxa = p.Id_Taxa
+    where year(p.DataEmissao) = ${ano} and p.statusPagamento = 1
+    group by ano, mes
+    order by ano, mes asc;`, (err, rows, fields) => {
           resolve(JSON.parse(JSON.stringify(rows)))
         })
     }, 80)
@@ -104,7 +108,7 @@ async function calcularAno(ano) {
   })
   return pagamento
 }
-// Modificado: Agora demonstra os atrasos mês a mês levando em conta o dia
+// Modificado: Agora demonstra os atrasos mês a mês 
 async function calcularAno_inadimplente(ano) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {

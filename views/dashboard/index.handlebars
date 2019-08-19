@@ -1,9 +1,34 @@
 <script>
-  // Posicionando os valores saldoTotal
-  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0]
-              {{#each saldoTotal}}              
-                mesValorTotal[{{mes}}-1] = {{valor}}              
-               {{/each}}
+  
+  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0]              
+  let mesTrimestre =[];
+  let mesValorTrimestre = [0,0,0];
+  let trimestreTitulo  
+              {{#each saldoTotal}} 
+                if({{trimestre}}=={{trimestreAtual}})
+                {
+                  mesValorTrimestre[{{ordemTrimestre}}] = {{valor}}// posicionando o valordo trimestre
+                  switch({{trimestre}}){// organizando o trimestre
+                    case 1:
+                      mesTrimestre = ['Janeiro', 'Fevereiro', 'Março'],['Primeiro'];
+                      trimestreTitulo = 'Primeiro Trimestre';
+                    break;
+                    case 2:
+                      mesTrimestre = ['Abril', 'Maio', 'Junho',],['Segundo'];
+                      trimestreTitulo = 'Segundo Trimestre';
+                    break;
+                    case 3:
+                      mesTrimestre = ['Julho', 'Agosto', 'Setembro'],['Terceiro'];
+                      trimestreTitulo = 'Terceiro Trimestre';
+                    break;
+                    case 4:
+                      mesTrimestre = [ 'Outubro', 'Novembro', 'Dezembro'],['Quarto'];
+                      trimestreTitulo = 'Quarto Trimestre';
+                    break;
+                  }                 
+                }             
+                mesValorTotal[{{mes}}-1] = {{valor}} // Posicionando os valores saldoTotal              
+               {{/each}}               
 </script>
 <div class="container-fluid">
  
@@ -20,12 +45,12 @@
 
                 // The data for our dataset
                 data: {
-                  labels: ['Janeiro', 'Fevereiro', 'Março',],
+                  labels: mesTrimestre,
                   datasets: [{
-                    label: 'Primeiro Trimestre',
+                    label: trimestreTitulo,
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 36, 80)',
-                    data: [{{#each saldoTotal}}{{valor}},{{/each}}]
+                    data: mesValorTrimestre
                             }]
                         },
 

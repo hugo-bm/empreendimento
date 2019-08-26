@@ -83,7 +83,7 @@ router.get('/listarUm/:id', (req, res) => {
   
   router.get('/modificar/:id', (req, res) => {
     Usuario.listarUm(req.params.id).then((resultado) => {
-      res.render('modificarUsuario', { usuarios: resultado })
+      res.render('usuario/modificarUsuario', { usuarios: resultado })
     }).catch((err) => {
       console.log(`erro ao listar: ${err}`)
     })

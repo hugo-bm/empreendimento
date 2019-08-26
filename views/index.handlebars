@@ -10,7 +10,7 @@
         <div class="col-6 bg-my-color-2 rounded shadow-lg text-light" style="height: 300px; overflow-y: scroll">
                 {{#each usuarios}}                                               {{!Button boleto é apenas para demonstração                 }}
                 <p>
-                    Id: {{IdUsuario}} | Nome: {{Nome}} | E-mail: {{Email}} <a href="/usuario/pagamento/{{IdUsuario}}" class="btn btn-primary">Boleto</a> | <a href="usuario/modificar/{{IdUsuario}}" class="btn btn-primary">Editar</a> | <a href="usuario/excluir/{{IdUsuario}}" class="btn btn-primary">Excluir</a>
+                    Id: {{IdUsuario}} | Nome: {{Nome}} | E-mail: {{Email}} <a href="/usuario/pagamento/{{IdUsuario}}" class="btn btn-primary">Boleto</a> | <a href="/usuario/modificar/{{IdUsuario}}" class="btn btn-primary">Editar</a> | <a href="usuario/excluir/{{IdUsuario}}" class="btn btn-primary">Excluir</a>
                 </p>
                 {{/each}}
                 </p>

@@ -34,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/hugo-bm/emprendimento/issues"
   },
-  "homepage": "https://github.com/hugo-bm/emprendimento#readme"
+  "homepage": "https://github.com/hugo-bm/emprendimento#readme",
+  "directories": {
+    "example": "examples"
+  }
 }

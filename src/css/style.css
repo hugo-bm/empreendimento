@@ -8,6 +8,18 @@
   max-width: 240px;
 }
 
+.aligni-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .input-login {
   border-width: 0 0 1px 0;
   border-color: #fff;
@@ -47,6 +59,12 @@
   margin-bottom: 0;
   background-color: #dc3546b9;
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* iframe*/
+.iframe {
+  min-height: 480px;
+  height: 100%;
 }
 
 /*!

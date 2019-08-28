@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `empreendimento` (
 -- Fazendo dump de dados para tabela `empreendimento`
 --
 
-INSERT INTO `empreendimento` (`IdEmpreendimento`, `Nome`, `Bloco`, `Apartamento`) VALUES
+INSERT INTO `EMPREENDIMENTO` (`IDEMPREENDIMENTO`, `NOME`, `BLOCO`, `APARTAMENTO`) VALUES
 (1, 'Bons Ventos', '2', '101'),
 (2, 'Bons Ventos', '2', '102'),
 (3, 'Bons Ventos', '2', '103'),
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `pagamento` (
 -- Fazendo dump de dados para tabela `pagamento`
 --
 
-INSERT INTO `pagamento` (`IdPagamento`, `Token`, `DataEmissao`, `DataVencimento`, `DataPagamento`, `StatusPagamento`, `Id_Usuario`, `Id_Taxa`) VALUES
+INSERT INTO `PAGAMENTO` (`IDPAGAMENTO`, `TOKEN`, `DATAEMISSAO`, `DATAVENCIMENTO`, `DATAPAGAMENTO`, `STATUSPAGAMENTO`, `ID_USUARIO`, `ID_TAXA`) VALUES
 (1, 'zxpkVRJXCo4MltMR_ce92mdSGWxFzyYXT1v-X88iKz4=', '2019-08-10 00:00:00', '2019-08-30 00:00:00', '2019-08-12 21:54:08', 0, 1, 1),
 (2, 'z_dRoLOTf8hh6AJak8UV_8sw-hI70oenEEPquTG4TJU=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 1, 1, 1),
 (3, 'jyD-7m-tTXS9X3aKXnJobVdlBHv7Ou-D6zNX-vbZ1_g=', '2019-08-12 00:00:00', '2019-09-12 00:00:00', '2019-08-12 21:54:08', 2, 0, 1),
@@ -194,8 +194,8 @@ CREATE TABLE IF NOT EXISTS `taxa` (
 -- Fazendo dump de dados para tabela `taxa`
 --
 
-INSERT INTO `taxa` (`IdTaxa`, `Tipo`, `Valor`, `Descricao`, `DataCadastro`) VALUES
-(1, 'condominio', 310.00, 'atualização da cota condominial', '2019-08-11 22:38:57');
+INSERT INTO `TAXA` (`IDTAXA`, `TIPO`, `VALOR`, `DESCRICAO`, `DATACADASTRO`) VALUES
+(1, 'CONDOMINIO', 310.00, 'atualização da cota condominial', '2019-08-11 22:38:57');
 
 -- --------------------------------------------------------
 
@@ -220,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 -- Fazendo dump de dados para tabela `usuario`
 --
 
-INSERT INTO `usuario` (`IdUsuario`, `Nome`, `Email`, `Senha`, `Cpf`, `DataCadastro`, `Id_Empreendimento`, `statusCliente`) VALUES
+INSERT INTO `USUARIO` (`IDUSUARIO`, `NOME`, `EMAIL`, `SENHA`, `CPF`, `DATACADASTRO`, `ID_EMPREENDIMENTO`, `STATUSCLIENTE`) VALUES
 (1, 'Alex Reis', 'alex.reis@gmail.com', 'al3xal3x', '222.222.222-22', '2019-08-12 09:30:33', 1, 1),
 (2, 'Leandro Barata', 'leandro.Barata@hotmail.com', 'b4r4t4', '222.222.222-22', '2019-08-12 09:30:33', 2, 1),
 (3, 'Pedro Azeredo', 'pedro.azeredo@uol.com', 'p3dr0', '222.222.222-22', '2019-08-12 09:30:33', 3, 1),

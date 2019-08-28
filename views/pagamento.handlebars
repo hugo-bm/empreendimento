@@ -2,10 +2,10 @@
   <div class="panel-header panel-header-md">
     {{#each usuarios}} 
     
-          <h3 class="mx-4 my-3 text-light text-left">{{Nome}}</h3>      
+          <h3 class="mx-4 my-3 text-light text-left">{{NOME}}</h3>      
           <div class="d-flex mx-3 px-3">
             <form action="boleto/" method="post">
-              <input type="hidden" name="id" id="id" value="{{IdUsuario}}">
+              <input type="hidden" name="id" id="id" value="{{IDUSUARIO}}">
               <button class="btn btn-primary"  type="submit">Gerar Boleto</button>
           </div>
     
@@ -39,43 +39,43 @@
                     </thead>
                     <tbody>
                       {{#each boletos}}
-                      <tr id="{{DataVencimento}}{{IdPagamento}}">
-                        <td id="{{{DataEmissao}}}{{IdPagamento}}">
+                      <tr id="{{DATAVENCIMENTO}}{{IDPAGAMENTO}}">
+                        <td id="{{{DATAEMISSAO}}}{{IDPAGAMENTO}}">
                           <script>              
-                            this.document.getElementById('{{{DataEmissao}}}{{IdPagamento}}').innerText = '' + (new Date('{{{DataEmissao}}}').getUTCMonth() + 1);
+                            this.document.getElementById('{{{DATAEMISSAO}}}{{IDPAGAMENTO}}').innerText = '' + (new Date('{{{DATAEMISSAO}}}').getUTCMonth() + 1);
                           </script>
                         </td>
                         <td>
-                          {{{DataEmissao}}}
+                          {{{DATAEMISSAO}}}
                         </td>
                         <td>
-                          {{DataVencimento}}
+                          {{DATAVENCIMENTO}}
                         </td>
-                        <td class="text-right" id='{{IdPagamento}}'>
+                        <td class="text-right" id='{{IDPAGAMENTO}}'>
                           <Script>  
-                              let cor{{IdPagamento}} ='';
-                              let texto{{IdPagamento}} = '';
-                              if({{StatusPagamento}} == 1)
+                              let cor{{IDPAGAMENTO}} ='';
+                              let texto{{IDPAGAMENTO}} = '';
+                              if({{STATUSPAGAMENTO}} == 1)
                                 {
-                                  cor{{IdPagamento}} = '#28a733b9';
-                                  texto{{IdPagamento}} = 'Pago'
+                                  cor{{IDPAGAMENTO}} = '#28a733b9';
+                                  texto{{IDPAGAMENTO}} = 'Pago'
                                 }
                               else{
-                                  if({{tempoAtraso}} >= 0)
+                                  if({{TEMPOATRASO}} >= 0)
                                     {
-                                      cor{{IdPagamento}} = '#dc3545';
-                                      texto{{IdPagamento}} = 'Em atraso'
+                                      cor{{IDPAGAMENTO}} = '#dc3545';
+                                      texto{{IDPAGAMENTO}} = 'Em atraso'
                                     }else{
-                                      texto{{IdPagamento}} = 'Aguardando Pagamento'
+                                      texto{{IDPAGAMENTO}} = 'Aguardando Pagamento'
                                     }
                                 }
-                              this.document.getElementById('{{IdPagamento}}').innerText = texto{{IdPagamento}}
-                              this.document.getElementById('{{DataVencimento}}{{IdPagamento}}').style.backgroundColor = cor{{IdPagamento}};
+                              this.document.getElementById('{{IDPAGAMENTO}}').innerText = texto{{IDPAGAMENTO}}
+                              this.document.getElementById('{{DATAVENCIMENTO}}{{IDPAGAMENTO}}').style.backgroundColor = cor{{IDPAGAMENTO}};
                             
                           </Script>
                           </td>
                           </td>          
-                            <td><a href="/usuario/pagamento/boleto/{{Token}}" class="btn btn-outline-primary">Visualizar</a></td>
+                            <td><a href="/usuario/pagamento/boleto/{{TOKEN}}" class="btn btn-outline-primary">Visualizar</a></td>
                           </tr>
                           </tr>
                         {{else}}

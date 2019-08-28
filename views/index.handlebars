@@ -1,16 +1,16 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col">
-            <h1 class="text-center">
+ <div class="panel-header panel-header-md">
+     <br>
+      <h1 class="text-center text-light">
                 -Listando banco de dados-
             </h1>
-        </div>       
-    </div>
+ </div>
+<div class="container mt-5">
+    
     <div class="row">
         <div class="col-6 bg-my-color-2 rounded shadow-lg text-light" style="height: 300px; overflow-y: scroll">
-                {{#each usuarios}}                                               {{!Button boleto é apenas para demonstração                 }}
+                {{#each usuarios}}                                              
                 <p>
-                    Id: {{IdUsuario}} | Nome: {{Nome}} | E-mail: {{Email}} <a href="/usuario/pagamento/{{IdUsuario}}" class="btn btn-primary">Boleto</a> | <a href="/usuario/modificar/{{IdUsuario}}" class="btn btn-primary">Editar</a> | <a href="usuario/excluir/{{IdUsuario}}" class="btn btn-primary">Excluir</a>
+                    Id: {{IDUSUARIO}} | Nome: {{NOME}} | E-mail: {{EMAIL}} <a href="/usuario/pagamento/{{IDUSUARIO}}" class="btn btn-primary">Boleto</a> | <a href="/usuario/modificar/{{IDUSUARIO}}" class="btn btn-primary">Editar</a> | <a href="usuario/excluir/{{IDUSUARIO}}" class="btn btn-primary">Excluir</a>
                 </p>
                 {{/each}}
                 </p>
@@ -30,7 +30,7 @@
                 <label>Apartamento </label>
                 <select class="form-control" name="apartamento" id="apartamento" required>
                     {{#each apartamentos}}
-                    <option value="{{IdEmpreendimento}}">{{Apartamento}}</ooption>
+                    <option value="{{IDEMPREENDIMENTO}}">{{APARTAMENTO}}</option>
                     {{/each}}
                 </select>
                 

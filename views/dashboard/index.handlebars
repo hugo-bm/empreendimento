@@ -5,10 +5,10 @@
   let mesValorTrimestre = [0,0,0];
   let trimestreTitulo  
               {{#each saldoTotal}} 
-                if({{trimestre}}=={{trimestreAtual}})
+                if({{TRIMESTRE}}=={{TRIMESTREATUAL}})
                 {
-                  mesValorTrimestre[{{ordemTrimestre}}] = {{valor}}// posicionando o valordo trimestre
-                  switch({{trimestre}}){// organizando o trimestre
+                  mesValorTrimestre[{{ORDEMTRIMESTRE}}] = {{VALOR}}// posicionando o valordo trimestre
+                  switch({{TRIMESTRE}}){// organizando o trimestre
                     case 1:
                       mesTrimestre = ['Janeiro', 'Fevereiro', 'Março'],['Primeiro'];
                       trimestreTitulo = 'Primeiro Trimestre';
@@ -27,7 +27,8 @@
                     break;
                   }                 
                 }             
-                mesValorTotal[{{mes}}-1] = {{valor}} // Posicionando os valores saldoTotal              
+                mesValorTotal[{{MES}}-1] = {{VALOR}} // Posicionando os valores saldoTotal   
+                         
                {{/each}}               
 </script>
 
@@ -160,7 +161,8 @@
                        // Posicionando os valores Inadimplentes
                let mesInadimplente = [0,0,0,0,0,0,0,0,0,0,0,0]
               {{#each inadimplente}}              
-                mesInadimplente[{{mes}}-1] = {{valor}}              
+                mesInadimplente[{{MES}}-1] = {{VALOR}} 
+                           
                {{/each}}
                       var ctx = document.getElementById("lineChartExample").getContext("2d");
 
@@ -262,8 +264,10 @@
         <div class="col-lg-4 col-md-6">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">2018 Sales</h5>
-                <h4 class="card-title">All products</h4>
+                <h5 class="card-category">Gráfico Trimestral</h5>
+                <h4 class="card-title" id="graficoTitulo"><script>              
+                            this.document.getElementById('graficoTitulo').innerText = trimestreTitulo;
+                          </script></h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
@@ -278,7 +282,74 @@
               </div>
               <div class="card-body">
                 <div class="chart-area"> <!-- Gráfico* (Olhar arquivo demo.js, e montar um equivalente) -->
-                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                  <canvas id="grafico_trimestre">
+                    <script>
+                     var ctx = document.getElementById("grafico_trimestre").getContext("2d");
+
+                      gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+                      gradientFill.addColorStop(1, 'rgb(255, 99, 132)');
+                      gradientFill.addColorStop(0, "rgba(24, 206, 15, 0)");    
+                      var viewsChart = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                          labels: mesTrimestre,
+                          datasets: [{
+                            label: trimestreTitulo,
+                            backgroundColor: gradientFill,
+                            borderColor: 'rgb(255, 36, 80)',
+                            pointBorderColor: "#FFF",
+                            pointBackgroundColor: 'rgb(255, 36, 80)',
+                            pointBorderWidth: 2,
+                            pointHoverRadius: 4,
+                            pointHoverBorderWidth: 1,
+                            pointRadius: 4,
+                            fill: true,
+                            borderWidth: 1,
+                            data: mesValorTrimestre
+                          }]
+                        },
+                        options: {
+                          maintainAspectRatio: false,
+                          legend: {
+                            display: false
+                          },
+                          tooltips: {
+                            bodySpacing: 4,
+                            mode: "nearest",
+                            intersect: 0,
+                            position: "nearest",
+                            xPadding: 10,
+                            yPadding: 10,
+                            caretPadding: 10
+                          },
+                          responsive: 1,
+                          scales: {
+                            yAxes: [{
+                              gridLines: 0,
+                              gridLines: {
+                                zeroLineColor: "transparent",
+                                drawBorder: false
+                              }
+                            }],
+                            xAxes: [{
+                              display: 1,
+                              gridLines: 0,
+                              ticks: {
+                                display: true
+                              },
+                              gridLines: {
+                                zeroLineColor: "transparent",
+                                drawTicks: false,
+                                display: false,
+                                drawBorder: false
+                              }
+                            }]
+                          }
+                          
+                        }
+                      });
+                    </script>
+                  </canvas>
                 </div>
               </div>
               <div class="card-footer">
@@ -290,6 +361,59 @@
           </div>
 
       <!-- Fim Grafico 2 -->
+
+      <!-- Lista  -->
+
+         <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-category">Rank de Inadimplentes</h5>
+                <h4 class="card-title"> Employees Stats</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th class="text-center">
+                        Nome
+                      </th>
+                      <th class="text-center">
+                        Tempo de atraso
+                      </th>
+                      <th class="text-center">Valor</th>
+                      <th class="text-center">
+                        Contato
+                      </th>
+                    </thead>
+                    <tbody>
+                       {{#each rank}}
+                      <tr>
+                        <td class="text-center">
+                          {{NOME}} <!-- Nome-->
+                        </td>
+                        <td class="text-center">
+                          <b class="text-danger">{{TEMPOATRASO}}</b> dias     <!-- Tempo de atraso-->
+                        </td>
+                        <td class="text-center">
+                          <Span>R$ {{VALOR}}</Span>
+                        </td>
+                        <td>
+                          <a href="mailto:{{EMAIL}}"><small>{{EMAIL}}</small></a>  <!-- Contato -->
+                        </td>                                              
+                      </tr>
+                      {{else}}
+                      <tr>
+                        <h2>Não há moradores Inadimplentes</h2>
+                      </tr>
+                      {{/each}}
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+      <!-- fim Lista -->
 
       <!-- Grafico 3 -->
 
@@ -314,6 +438,8 @@
         </div>
       <!-- Fim Grafico 3 -->
       
+      
+
       <!-- Tarefas -->
 
         <div class="row">
@@ -400,55 +526,7 @@
 
       <!-- Fim Tarefas -->
       
-      <!-- Lista  -->
-
-         <div class="col-md-8">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-category">Rank de Inadimplentes</h5>
-                <h4 class="card-title"> Employees Stats</h4>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead class=" text-primary">
-                      <th>
-                        Nome
-                      </th>
-                      <th>
-                        Tempo de atraso
-                      </th>
-                      
-                      <th class="text-center">
-                        Contato
-                      </th>
-                    </thead>
-                    <tbody>
-                       {{#each rank}}
-                      <tr>
-                        <td>
-                          {{nome}} <!-- Nome-->
-                        </td>
-                        <td class="text-center">
-                          <b class="text-danger">{{tempoAtraso}}</b> dias     <!-- Tempo de atraso-->
-                        </td>
-                        <td>
-                          <a href="mailto:{{email}}"><small>{{email}}</small></a>  <!-- Contato -->
-                        </td>                                              
-                      </tr>
-                      {{else}}
-                      <tr>
-                        <h2>Não há moradores Inadimplentes</h2>
-                      </tr>
-                      {{/each}}
-                      
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-      <!-- fim Lista -->
+      
        </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ router.get('/', (req, res) => {
 
 // boleto rota
 router.get('/pagamento/:id',(req,res)=>{ // view dos boletos por usuário
-  Usuario.listarUm(req.params.id).then((resultado) => {  
-    Pagamento.listarPeloUsuario(resultado[0].IdUsuario).then((pagamentos)=>{    
+  Usuario.listarUm(req.params.id).then((resultado) => {    
+    Pagamento.listarPeloUsuario(resultado[0].IDUSUARIO).then((pagamentos)=>{  
       res.render('pagamento', { usuarios: resultado, boletos: pagamentos })
     }).catch((err)=>{
       console.log(`Erro ao carregar os pagamentos: ${err}`)
@@ -37,7 +37,6 @@ router.get('/pagamento/boleto/remessa', (req,res)=>{
  v()
     async function v(){
     let file =   await boleto.boletoRemessa()
-    console.log(file.path)
     res.render('remessa',{file: file})
   }   
 })
@@ -55,8 +54,7 @@ router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um bol
     console.log(`erro ao listar: ${err}`)
   })
   async function v(resultado){
-    let url =  [{url: await boleto.boletoGerar(resultado[0].Nome,resultado[0].Cpf, resultado[0].IdUsuario)}] // nome e cpf/cnpj 
-    console.log(url)
+    let url =  [{url: await boleto.boletoGerar(resultado[0].NOME,resultado[0].CPF, resultado[0].IDUSUARIO)}] // nome e cpf/cnpj 
     res.render('boleto',{iframe: url})
   }   
 })

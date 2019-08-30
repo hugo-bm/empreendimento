@@ -1,6 +1,10 @@
-<script>
-  
-  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0]              
+<script> // script principal 
+  // Ativando setinha
+    document.getElementById('setaRetorno').innerHTML = "<i class='fas fa-arrow-left fa-2x' onclick='history.go(-1)'></i>";
+
+  // Variaveis gráficos
+  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0] 
+  let mesAno;             
   let mesTrimestre =[];
   let mesValorTrimestre = [0,0,0];
   let trimestreTitulo  
@@ -27,7 +31,8 @@
                     break;
                   }                 
                 }             
-                mesValorTotal[{{MES}}-1] = {{VALOR}} // Posicionando os valores saldoTotal   
+                mesValorTotal[{{MES}}-1] = {{VALOR}} // Posicionando os valores saldoTotal 
+                mesAno = 'Balanço de '+ {{ANO}}  ;
                          
                {{/each}}               
 </script>
@@ -139,8 +144,8 @@
           <div class="col-lg-8">
             <div class="card card-chart">
               <div class="card-header">
-                <h5 class="card-category">Global Sales</h5>
-                <h4 class="card-title"></h4>
+                <h5 class="card-category">Gráfico Anual</h5>
+                <h4 class="card-title" id="graficoAnualTitulo"></h4>
                 <div class="dropdown">
                   <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
                     <i class="now-ui-icons loader_gear"></i>
@@ -164,6 +169,7 @@
                 mesInadimplente[{{MES}}-1] = {{VALOR}} 
                            
                {{/each}}
+               document.getElementById('graficoAnualTitulo').innerText = mesAno;
                       var ctx = document.getElementById("lineChartExample").getContext("2d");
 
     gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
@@ -364,13 +370,13 @@
 
       <!-- Lista  -->
 
-         <div class="col-md-8">
+         <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-category">Rank de Inadimplentes</h5>
-                <h4 class="card-title"> Employees Stats</h4>
+                <h4 class="card-title"> Lista de Atrasos</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body w-auto p-3">
                 <div class="table-responsive">
                   <table class="table">
                     <thead class=" text-primary">
@@ -397,8 +403,8 @@
                         <td class="text-center">
                           <Span>R$ {{VALOR}}</Span>
                         </td>
-                        <td>
-                          <a href="mailto:{{EMAIL}}"><small>{{EMAIL}}</small></a>  <!-- Contato -->
+                        <td class="text-center"><!-- O botão envia os dados para uma função em forma de string -->
+                          <button class="btn btn-outline-primary" data-toggle="modal" data-target=".modal-conatatos-xl" onclick="modal('{{NOME}}','{{EMAIL}}')">Contato</button>
                         </td>                                              
                       </tr>
                       {{else}}
@@ -414,6 +420,70 @@
             </div>
 
       <!-- fim Lista -->
+
+      <!-- Modal-->
+
+      
+        <div class="modal fade modal-conatatos-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Contato</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <script>// script secundario
+                // modal
+                function modal(nome,email){
+                   document.getElementById('nome').innerText = nome;
+                document.getElementById('email').innerHTML = '<a href="mailto:' + email +'"><h4><i class="far fa-envelope fa-fw"></i>'+ email +'</h4></a>'
+                }
+              </script>
+              <div class="modal-body">
+                <h2 class="mx-4 my-3 text-primary text-left" id="nome"></h2>
+                
+                  <small class="mx-4 my-3 text-secundary text-left" id="apartamento">Apartamento X, Bloco Y</small>
+                
+                <div class="table-responsive modal-dialog-scrollable">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>
+                          Telefone
+                        </th>
+                        <th>
+                          Celular
+                        </th>
+                        <th>
+                          Email
+                        </th>                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td id="tel">
+                         <i class="fas fa-phone fa-fw text-primary"></i> Telefone aqui
+                        </td>
+                        <td id="cel">
+                         <i class="fas fa-mobile fa-fw text-primary"></i> Celular aqui
+                        </td>
+                        <td id="email">
+
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>             
+                
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      <!-- Fim Modal -->
+
 
       <!-- Grafico 3 -->
 

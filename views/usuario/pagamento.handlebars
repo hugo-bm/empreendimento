@@ -13,14 +13,14 @@
   </div> 
    <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 ">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title"> Tabela de Pagamentos</h4>
               </div>
-              <div class="card-body">
+              <div class="card-body ">
                 <div class="table-responsive">
-                  <table class="table">
+                  <table class="table table-striped">
                     <thead class=" text-primary">
                      <tr>
                         <th>
@@ -57,13 +57,13 @@
                               let texto{{IDPAGAMENTO}} = '';
                               if({{STATUSPAGAMENTO}} == 1)
                                 {
-                                  cor{{IDPAGAMENTO}} = '#28a733b9';
+                                  cor{{IDPAGAMENTO}} = 'rgb(0,255,128)';
                                   texto{{IDPAGAMENTO}} = 'Pago'
                                 }
                               else{
                                   if({{TEMPOATRASO}} >= 0)
                                     {
-                                      cor{{IDPAGAMENTO}} = '#dc3545';
+                                      cor{{IDPAGAMENTO}} = 'rgb(255,72,72)';
                                       texto{{IDPAGAMENTO}} = 'Em atraso'
                                     }else{
                                       texto{{IDPAGAMENTO}} = 'Aguardando Pagamento'
@@ -92,6 +92,8 @@
           </div>
         </div>
       </div>
-      
+<script>//ativando setinha
+  document.getElementById('setaRetorno').innerHTML = "<i class='fas fa-arrow-left fa-2x' onclick='history.go(-1)'></i>";
+</script>         
                  
   

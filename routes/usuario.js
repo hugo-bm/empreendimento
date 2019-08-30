@@ -11,20 +11,25 @@ const boleto = require('./boleto')// temporario
 const path = require('path')
 //Rotas
 router.get('/', (req, res) => {
-    Usuario.listar().then((resultado) => {
-      Empreendimento.listar().then((empreendimento) => {
-        res.render('index', { usuarios: resultado, apartamentos: empreendimento })
-      })
-    }).catch((err) => {
-      console.log(`erro ao listar: ${err}`)
+  Usuario.listar().then((resultado) => {
+    Empreendimento.listar().then((empreendimento) => {
+      res.render('index', { usuarios: resultado, apartamentos: empreendimento })
     })
+  }).catch((err) => {
+    console.log(`erro ao listar: ${err}`)
   })
+})
+router.get('/dashboard/:id',(req,res)=>{
+  Usuario.listarUm(req.params.id).then((resultado)=>{
+    res.render('usuario/dashboard/index',{usuario: resultado})
+  })
+})
 
 // boleto rota
 router.get('/pagamento/:id',(req,res)=>{ // view dos boletos por usuário
   Usuario.listarUm(req.params.id).then((resultado) => {    
     Pagamento.listarPeloUsuario(resultado[0].IDUSUARIO).then((pagamentos)=>{  
-      res.render('pagamento', { usuarios: resultado, boletos: pagamentos })
+      res.render('usuario/pagamento', { usuarios: resultado, boletos: pagamentos })
     }).catch((err)=>{
       console.log(`Erro ao carregar os pagamentos: ${err}`)
     })  
@@ -42,7 +47,7 @@ router.get('/pagamento/boleto/remessa', (req,res)=>{
 })
 router.get('/pagamento/boleto/:token',(req,res)=>{// View do boleto por qualquer parte do programa
   let url = [{url:`https://sandbox.boletocloud.com/boleto/2via/${req.params.token}`}];
-  res.render('boleto',{iframe: url})
+  res.render('pagamento/boleto',{iframe: url})
 })
 
 router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um boleto 
@@ -55,7 +60,7 @@ router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um bol
   })
   async function v(resultado){
     let url =  [{url: await boleto.boletoGerar(resultado[0].NOME,resultado[0].CPF, resultado[0].IDUSUARIO)}] // nome e cpf/cnpj 
-    res.render('boleto',{iframe: url})
+    res.render('pagamento/boleto',{iframe: url})
   }   
 })
 

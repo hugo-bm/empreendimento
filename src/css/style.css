@@ -67,6 +67,15 @@
   height: 100%;
 }
 
+/* icone flutuante*/
+.icone-flutuante-left {
+  position: absolute;
+  float: top;
+  top: -25px;
+  right: -15px;
+  z-index: 3;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors

@@ -65,7 +65,6 @@ const fs = require('fs')
                 }
                 else{//Pagamento.adicionar( Token, Data de Emisão, Data de Vencimento, Status Do Pagamento, Id_Usuario, Id_Taxa)
                     Pagamento.adicionar(response.headers['x-boletocloud-token'], dataEmissao, dataVencimento, 0, id, 1)
-                    console.log(response.headers['x-boletocloud-token'])
                     let boleto =   'https://sandbox.boletocloud.com/boleto/2via/' + response.headers['x-boletocloud-token']
                     resolve(boleto);
                 }

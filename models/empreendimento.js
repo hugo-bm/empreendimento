@@ -4,7 +4,7 @@ const db = require('../config/connection')
 async function listar() {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query('SELECT * FROM empreendimento', (err, rows, fields)=>{
+            db.connection.query('SELECT * FROM EMPREENDIMENTO', (err, rows, fields)=>{
                 let string = JSON.stringify(rows)
                 let json = JSON.parse(string)
                 resolve(json)
@@ -18,7 +18,7 @@ async function listar() {
 async function listarUm(id) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`SELECT * FROM empreendimento WHERE id='${id}'`, (err, rows, fields)=>{
+            db.connection.query(`SELECT * FROM EMPREENDIMENTO WHERE ID='${id}'`, (err, rows, fields)=>{
                 let string = JSON.stringify(rows)
                 let json = JSON.parse(string)
                 resolve(json)
@@ -31,7 +31,7 @@ async function listarUm(id) {
 async function adicionar(nome, email) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`INSERT INTO empreendimento (nome, email) VALUES ('${nome}', '${email}')`, (err, result)=>{
+            db.connection.query(`INSERT INTO EMPREENDIMENTO (NOME, EMAIL) VALUES ('${nome}', '${email}')`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao cadastrar ${err}`)
                 }
@@ -44,7 +44,7 @@ async function adicionar(nome, email) {
 async function modificar(id, nome, email) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`UPDATE empreendimento SET nome="${nome}", email="${email}" WHERE id="${id}"`, (err, result)=>{
+            db.connection.query(`UPDATE EMPREENDIMENTO SET NOME="${nome}", EMAIL="${email}" WHERE ID="${id}"`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao modificar empreendimento ${err}`)
                 }
@@ -57,7 +57,7 @@ async function modificar(id, nome, email) {
 async function excluir(id) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`DELETE FROM empreendimento WHERE id='${id}'`, (err, result)=>{
+            db.connection.query(`DELETE FROM EMPREENDIMENTO WHERE ID='${id}'`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao excluir empreendimento ${err}`)
                 }
@@ -70,7 +70,7 @@ async function excluir(id) {
 async function calcular_ano(ano) {
     let empreendimento = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`SELECT SUM(VALOR) AS total FROM pagamento WHERE YEAR(DataPagamento) = ${ano}`, (err, rows, fields)=>{
+            db.connection.query(`SELECT SUM(VALOR) AS TOTAL FROM PAGAMENTO WHERE YEAR(DATAPAGAMENTO) = ${ano}`, (err, rows, fields)=>{
                 resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)

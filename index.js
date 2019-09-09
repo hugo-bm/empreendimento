@@ -41,11 +41,18 @@ app.engine("handlebars", handlebars({ defaultLayout: "main" }))
 app.set("view engine", "handlebars")
 
 //Public static
+
 app.use(express.static(path.join(__dirname, "src")))
 app.set('views', path.join(__dirname, 'views'))
 
 //Rotas
-//
+<<<<<<< HEAD
+
+=======
+app.get("/",(req,res)=>{
+  res.render("login");
+})
+>>>>>>> d0e663bf8847c4bc26fbfd4f37a64266c8559101
 
 //Instanciando Rotas
 app.use('/usuario', usuario)

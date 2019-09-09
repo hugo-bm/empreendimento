@@ -1,0 +1,35 @@
+{{#each usuario}}  
+<div class="panel-header panel-header-md">
+        
+          <h3 class="mx-4 my-3 text-light text-left">Bem vindo, {{NOME}}!</h3>  
+          
+    
+</div>
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-sm-6 w-auto p-3">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <i class="fas fa-wallet fa-4x icone-flutuante-left text-primary"></i>
+                    <h4 class="card-title">Pagamentos</h4>                    
+                    <P class="card-text"> Imprima, compartilhe e acompanhe o estado dos seus pagamentos</p>
+                    <a href="/usuario/pagamento/{{IDUSUARIO}}" class="btn btn-primary">Visitar</a> 
+                    </a>                                                    
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 w-auto p-3">
+            <div class="card border-primary">
+                <div class="card-body">
+                    <i class="fas fa-users-cog fa-4x icone-flutuante-left text-primary"></i>
+                    <h4 class="card-title">Atualizar Contato</h4>
+                    <p class="card-text">Mantenha seus contatos atualizados e receba as notificações do seu condominio por email</p>
+                    <a href="#" class="btn btn-primary text-center">Visitar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

@@ -9,9 +9,9 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 
 //Rotas 
   router.get('/dashboard', (req, res) => {
-    Pagamento.calcularAno('2019').then((saldoTotal) => {     
+    Pagamento.calcularAno('2019').then((saldoTotal) => {   
       Pagamento.calcularAno_inadimplente('2019').then((inadimplente) => {
-        Pagamento.inadimplente().then((rank)=>{         
+        Pagamento.inadimplente().then((rank)=>{ 
           res.render('dashboard/index', { saldoTotal: saldoTotal, inadimplente: inadimplente, rank: rank })
         })        
       })

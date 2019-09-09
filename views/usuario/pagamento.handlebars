@@ -1,0 +1,99 @@
+
+  <div class="panel-header panel-header-md">
+    {{#each usuarios}} 
+    
+          <h3 class="mx-4 my-3 text-light text-left">{{NOME}}</h3>      
+          <div class="d-flex mx-3 px-3">
+            <form action="boleto/" method="post">
+              <input type="hidden" name="id" id="id" value="{{IDUSUARIO}}">
+              <button class="btn btn-primary"  type="submit">Gerar Boleto</button>
+          </div>
+    
+    {{/each}}
+  </div> 
+   <div class="content">
+        <div class="row">
+          <div class="col-md-12 ">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title"> Tabela de Pagamentos</h4>
+              </div>
+              <div class="card-body ">
+                <div class="table-responsive">
+                  <table class="table table-striped">
+                    <thead class=" text-primary">
+                     <tr>
+                        <th>
+                        Mes
+                      </th>
+                      <th>
+                        Emissão
+                      </th>
+                      <th>
+                        Vencimento
+                      </th>
+                      <th class="text-center">
+                        Status
+                      </th>
+                     </tr>                     
+                    </thead>
+                    <tbody>
+                      {{#each boletos}}
+                      <tr id="{{DATAVENCIMENTO}}{{IDPAGAMENTO}}">
+                        <td id="{{{DATAEMISSAO}}}{{IDPAGAMENTO}}">
+                          <script>              
+                            this.document.getElementById('{{{DATAEMISSAO}}}{{IDPAGAMENTO}}').innerText = '' + (new Date('{{{DATAEMISSAO}}}').getUTCMonth() + 1);
+                          </script>
+                        </td>
+                        <td>
+                          {{{DATAEMISSAO}}}
+                        </td>
+                        <td>
+                          {{DATAVENCIMENTO}}
+                        </td>
+                        <td class="text-right" id='{{IDPAGAMENTO}}'>
+                          <Script>  
+                              let cor{{IDPAGAMENTO}} ='';
+                              let texto{{IDPAGAMENTO}} = '';
+                              if({{STATUSPAGAMENTO}} == 1)
+                                {
+                                  cor{{IDPAGAMENTO}} = 'rgb(0,255,128)';
+                                  texto{{IDPAGAMENTO}} = 'Pago'
+                                }
+                              else{
+                                  if({{TEMPOATRASO}} >= 0)
+                                    {
+                                      cor{{IDPAGAMENTO}} = 'rgb(255,72,72)';
+                                      texto{{IDPAGAMENTO}} = 'Em atraso'
+                                    }else{
+                                      texto{{IDPAGAMENTO}} = 'Aguardando Pagamento'
+                                    }
+                                }
+                              this.document.getElementById('{{IDPAGAMENTO}}').innerText = texto{{IDPAGAMENTO}}
+                              this.document.getElementById('{{DATAVENCIMENTO}}{{IDPAGAMENTO}}').style.backgroundColor = cor{{IDPAGAMENTO}};
+                            
+                          </Script>
+                          </td>
+                          </td>          
+                            <td><a href="/usuario/pagamento/boleto/{{TOKEN}}" class="btn btn-outline-primary">Visualizar</a></td>
+                          </tr>
+                          </tr>
+                        {{else}}
+                          <td><h4>Ainda não há pagamentos disponíveis</h4></td>
+          
+                        {{/each}}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<script>//ativando setinha
+  document.getElementById('setaRetorno').innerHTML = "<i class='fas fa-arrow-left fa-2x' onclick='history.go(-1)'></i>";
+</script>         
+                 
+  

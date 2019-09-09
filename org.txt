@@ -1,0 +1,874 @@
+/*main.handlebars*/
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <meta http-equiv="text/html" content="X-Content-Type-Options: nosniff" charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>
+    Dashboard
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <!-- CSS Files -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/css/now-ui-dashboard.css?v=1.3.0" rel="stylesheet" />
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="wrapper "> <!--Classe principal-->
+    
+    <div class="sidebar" data-color="blue"> <!-- Menu lateral -->
+    <div class="logo">
+        <a href="/" class="simple-text logo-mini">
+          NU
+        </a>
+        <a href="/" class="simple-text logo-normal">
+          Nome Usuário
+        </a>
+      </div>
+      <div class="sidebar-wrapper" id="sidebar-wrapper">
+        <ul class="nav">
+
+        <!-- Opções do menu -->
+
+          <li class="active ">
+            <a href="/pagamento/dashboard">
+              <i class="now-ui-icons design_app"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>         
+                   
+
+          <!-- Fim Opções Menu -->
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-panel" id="main-panel">
+
+        <!-- Navbar -->
+        {{>_navbar}}
+        <!--Fim Navbar -->
+        {{{body}}}
+      
+    </div>
+</div>
+
+<!--   Core JS Files   -->
+  <script="/js/core/jquery.min.js"></script>
+  <script="/js/core/popper.min.js"></script>
+  <script="/js/core/bootstrap.min.js" ></script>
+  <script="/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Chart JS -->
+  <script="/js/plugins/chartjs.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script="/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script="/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>
+  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+  <script="/demo/demo.js"></script>
+  <script>
+   // $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+    //  demo.initDashboardPageCharts();
+
+    //});
+  </script>
+</body>
+
+</html>
+/* Fim main.handlebars*/
+
+
+/* navbar.handlebars */
+
+    <nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="">Condominio Nome</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <form>
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search...">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="now-ui-icons media-2_sound-wave"></i>
+                  <p>
+                    <span class="d-lg-none d-md-block">Stats</span>
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="now-ui-icons location_world"></i>
+                  <p>
+                    <span class="d-lg-none d-md-block">Some Actions</span>
+                  </p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#pablo">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p>
+                    <span class="d-lg-none d-md-block">Account</span>
+                  </p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+/* Fim navbar.handlebars */
+
+/* dashboard/index.handlebars */
+
+    <script>
+  
+  let mesValorTotal = [0,0,0,0,0,0,0,0,0,0,0,0]              
+  let mesTrimestre =[];
+  let mesValorTrimestre = [0,0,0];
+  let trimestreTitulo  
+              {{#each saldoTotal}} 
+                if({{trimestre}}=={{trimestreAtual}})
+                {
+                  mesValorTrimestre[{{ordemTrimestre}}] = {{valor}}// posicionando o valordo trimestre
+                  switch({{trimestre}}){// organizando o trimestre
+                    case 1:
+                      mesTrimestre = ['Janeiro', 'Fevereiro', 'Março'],['Primeiro'];
+                      trimestreTitulo = 'Primeiro Trimestre';
+                    break;
+                    case 2:
+                      mesTrimestre = ['Abril', 'Maio', 'Junho',],['Segundo'];
+                      trimestreTitulo = 'Segundo Trimestre';
+                    break;
+                    case 3:
+                      mesTrimestre = ['Julho', 'Agosto', 'Setembro'],['Terceiro'];
+                      trimestreTitulo = 'Terceiro Trimestre';
+                    break;
+                    case 4:
+                      mesTrimestre = [ 'Outubro', 'Novembro', 'Dezembro'],['Quarto'];
+                      trimestreTitulo = 'Quarto Trimestre';
+                    break;
+                  }                 
+                }             
+                mesValorTotal[{{mes}}-1] = {{valor}} // Posicionando os valores saldoTotal              
+               {{/each}}               
+</script>
+
+<div class="panel-header panel-header-lg"> <!-- Card do topo -->
+        <canvas id="bigDashboardChart">   <!-- Resolvi colocar manualmente -->
+          <script>
+          chartColor = "#FFFFFF";
+
+    // General configuration for the charts with Line gradientStroke
+    
+    var ctx = document.getElementById('bigDashboardChart').getContext("2d");
+
+    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    gradientStroke.addColorStop(0, '#80b6f4');
+    gradientStroke.addColorStop(1, chartColor);
+
+    var gradientFill = ctx.createLinearGradient(0, 200, 0, 50);
+    gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+    gradientFill.addColorStop(1, "rgba(255, 255, 255, 0.24)");
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ["JAN", "FEV", "MAR", "APR", "MAI", "JUN", "JUL", "AUG", "SET", "OUT", "NOV", "DEZ"],
+        datasets: [{
+          label: "Balanço mês-a-mês",
+          borderColor: chartColor,
+          pointBorderColor: chartColor,
+          pointBackgroundColor: "#1e3d60",
+          pointHoverBackgroundColor: "#1e3d60",
+          pointHoverBorderColor: chartColor,
+          pointBorderWidth: 1,
+          pointHoverRadius: 7,
+          pointHoverBorderWidth: 2,
+          pointRadius: 5,
+          fill: true,
+          backgroundColor: gradientFill,
+          borderWidth: 2,
+          data: mesValorTotal
+        }]
+      },
+      options: {
+        layout: {
+          padding: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 0
+          }
+        },
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: '#fff',
+          titleFontColor: '#333',
+          bodyFontColor: '#666',
+          bodySpacing: 4,
+          xPadding: 12,
+          mode: "nearest",
+          intersect: 0,
+          position: "nearest"
+        },
+        legend: {
+          position: "bottom",
+          fillStyle: "#FFF",
+          display: false
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              fontColor: "rgba(255,255,255,0.4)",
+              fontStyle: "bold",
+              beginAtZero: true,
+              maxTicksLimit: 5,
+              padding: 10
+            },
+            gridLines: {
+              drawTicks: true,
+              drawBorder: false,
+              display: true,
+              color: "rgba(255,255,255,0.1)",
+              zeroLineColor: "transparent"
+            }
+
+          }],
+          xAxes: [{
+            gridLines: {
+              zeroLineColor: "transparent",
+              display: false,
+
+            },
+            ticks: {
+              padding: 10,
+              fontColor: "rgba(255,255,255,0.4)",
+              fontStyle: "bold"
+            }
+          }]
+        }
+      }
+    });
+        </script>          
+        </canvas>        
+      </div>
+
+      <!-- Grafico 1 -->
+
+        <div class="content">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Global Sales</h5>
+                <h4 class="card-title"></h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <!-- Configurações do Card/Gráfico -->
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body ">
+                <div class="chart-area"> <!-- Gráfico* (Olhar arquivo demo.js, e montar um equivalente) -->
+                  <canvas id="lineChartExample"> <!-- Resolvi colocar manualmente -->
+                    <script>
+                       // Posicionando os valores Inadimplentes
+               let mesInadimplente = [0,0,0,0,0,0,0,0,0,0,0,0]
+              {{#each inadimplente}}              
+                mesInadimplente[{{mes}}-1] = {{valor}}              
+               {{/each}}
+                      var ctx = document.getElementById("lineChartExample").getContext("2d");
+
+    gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+    gradientFill.addColorStop(1, 'rgb(0,255,128)');
+    gradientFill.addColorStop(0, "rgba(24, 206, 15, 0)");
+    let gradientFillInadimplente = ctx.createLinearGradient(0, 170, 0, 50);
+    gradientFillInadimplente.addColorStop(1, 'rgb(255,72,72)');
+    gradientFillInadimplente.addColorStop(0, "rgba(24, 206, 15, 0)");
+    var viewsChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["JAN", "FEV", "MAR", "APR", "MAI", "JUN", "JUL", "AUG", "SET", "OUT", "NOV", "DEZ"],
+        datasets: [{
+          label: 'Em dia',
+          backgroundColor: gradientFill,
+          borderColor: 'rgb(0, 170, 85)',
+          pointBorderColor: "#FFF",
+          pointBackgroundColor: 'rgb(0, 170, 85)',
+          pointBorderWidth: 2,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 1,
+          pointRadius: 4,
+          fill: true,
+          borderWidth: 1,
+          data: mesValorTotal
+        },
+        {
+          label: 'Inadimplente',
+          backgroundColor: gradientFillInadimplente,
+          borderColor: 'rgb(253, 0, 0)',
+          pointBorderColor: "#FFF",
+          pointBackgroundColor: 'rgb(253, 0, 0)',
+          pointBorderWidth: 2,
+          pointHoverRadius: 4,
+          pointHoverBorderWidth: 1,
+          pointRadius: 4,
+          fill: true,
+          borderWidth: 1,
+          data: mesInadimplente
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        legend: {
+          display: true
+        },
+        tooltips: {
+          bodySpacing: 4,
+          mode: "nearest",
+          intersect: 0,
+          position: "nearest",
+          xPadding: 10,
+          yPadding: 10,
+          caretPadding: 10
+        },
+        responsive: 1,
+        scales: {
+          yAxes: [{
+            gridLines: 0,
+            gridLines: {
+              zeroLineColor: "transparent",
+              drawBorder: false
+            }
+          }],
+          xAxes: [{
+            display: 1,
+            gridLines: 0,
+            ticks: {
+              display: true
+            },
+            gridLines: {
+              zeroLineColor: "transparent",
+              drawTicks: false,
+              display: false,
+              drawBorder: false
+            }
+          }]
+        }
+        
+      }
+    });
+                    </script>
+                  </canvas>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <!-- Fim Grafico 1 -->
+
+      <!-- Grafico 2 -->
+
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">2018 Sales</h5>
+                <h4 class="card-title">All products</h4>
+                <div class="dropdown">
+                  <button type="button" class="btn btn-round btn-outline-default dropdown-toggle btn-simple btn-icon no-caret" data-toggle="dropdown">
+                    <i class="now-ui-icons loader_gear"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart-area"> <!-- Gráfico* (Olhar arquivo demo.js, e montar um equivalente) -->
+                  <canvas id="lineChartExampleWithNumbersAndGrid"></canvas>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons arrows-1_refresh-69"></i> Just Updated
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <!-- Fim Grafico 2 -->
+
+      <!-- Grafico 3 -->
+
+        <div class="col-lg-4 col-md-6">
+            <div class="card card-chart">
+              <div class="card-header">
+                <h5 class="card-category">Email Statistics</h5>
+                <h4 class="card-title">24 Hours Performance</h4>
+              </div>
+              <div class="card-body">
+                <div class="chart-area"><!-- Gráfico* (Olhar arquivo demo.js, e montar um equivalente) -->
+                  <canvas id="barChartSimpleGradientsNumbers"></canvas>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                  <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Fim Grafico 3 -->
+      
+      <!-- Tarefas -->
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card  card-tasks">
+              <div class="card-header ">
+                <h5 class="card-category">Backend development</h5>
+                <h4 class="card-title">Tasks</h4>
+              </div>
+              <div class="card-body ">
+                <div class="table-full-width table-responsive">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked>
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </td>
+                        <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox">
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </td>
+                        <td class="text-left">Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="form-check">
+                            <label class="form-check-label">
+                              <input class="form-check-input" type="checkbox" checked>
+                              <span class="form-check-sign"></span>
+                            </label>
+                          </div>
+                        </td>
+                        <td class="text-left">Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                        </td>
+                        <td class="td-actions text-right">
+                          <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
+                            <i class="now-ui-icons ui-2_settings-90"></i>
+                          </button>
+                          <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
+                            <i class="now-ui-icons ui-1_simple-remove"></i>
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago
+                </div>
+              </div>
+            </div>
+          </div>
+
+      <!-- Fim Tarefas -->
+      
+      <!-- Lista  -->
+
+         <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-category">Rank de Inadimplentes</h5>
+                <h4 class="card-title"> Employees Stats</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                      <th>
+                        Nome
+                      </th>
+                      <th>
+                        Tempo de atraso
+                      </th>
+                      
+                      <th class="text-center">
+                        Contato
+                      </th>
+                    </thead>
+                    <tbody>
+                       {{#each rank}}
+                      <tr>
+                        <td>
+                          {{nome}} <!-- Nome-->
+                        </td>
+                        <td class="text-center">
+                          <b class="text-danger">{{tempoAtraso}}</b> dias     <!-- Tempo de atraso-->
+                        </td>
+                        <td>
+                          <a href="mailto:{{email}}"><small>{{email}}</small></a>  <!-- Contato -->
+                        </td>                                              
+                      </tr>
+                      {{else}}
+                      <tr>
+                        <h2>Não há moradores Inadimplentes</h2>
+                      </tr>
+                      {{/each}}
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+      <!-- fim Lista -->
+       </div>
+      </div>
+    </div>
+/* Fim dashboard/index.handlebars */
+
+/* Footer (criar partials _footer.handlebars)*/
+
+<footer class="footer">
+        <div class="container-fluid">
+          <nav>
+            <ul>
+              <li>
+                <a href="https://www.creative-tim.com">
+                  Creative Tim
+                </a>
+              </li>
+              <li>
+                <a href="http://presentation.creative-tim.com">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="http://blog.creative-tim.com">
+                  Blog
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="copyright" id="copyright">
+            &copy;
+            <script>
+              document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
+            </script>, Designed by
+            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+          </div>
+        </div>
+      </footer>
+
+/* Fim Footer */
+
+/* Boleto.handlebars*/
+
+<div class="panel-header panel-header-sm"></div> <!-- Parte escura no inicio do layout pode-se usar como cabeçalho -->
+        
+              {{#each iframe}}
+                <div class="embed-responsive embed-responsive-16by9 iframe">
+                  <iframe class="embed-responsive-item" src='{{{url}}}' allowfullscreen></iframe>
+                </div>
+            {{else}}
+            
+            {{/each}}          
+
+/* Fim Boleto.handlebars*/
+
+/* pagamento.handlebars*/
+
+  <div class="panel-header panel-header-md">
+    {{#each usuarios}} 
+    
+          <h3 class="mx-4 my-3 text-light text-left">{{Nome}}</h3>      
+          <div class="d-flex mx-3 px-3">
+            <form action="boleto/" method="post">
+              <input type="hidden" name="id" id="id" value="{{IdUsuario}}">
+              <button class="btn btn-primary"  type="submit">Gerar Boleto</button>
+          </div>
+    
+    {{/each}}
+  </div> 
+   <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title"> Tabela de Pagamentos</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class=" text-primary">
+                     <tr>
+                        <th>
+                        Mes
+                      </th>
+                      <th>
+                        Emissão
+                      </th>
+                      <th>
+                        Vencimento
+                      </th>
+                      <th class="text-center">
+                        Status
+                      </th>
+                     </tr>                     
+                    </thead>
+                    <tbody>
+                      {{#each boletos}}
+                      <tr id="{{DataVencimento}}{{IdPagamento}}">
+                        <td id="{{{DataEmissao}}}{{IdPagamento}}">
+                          <script>              
+                            this.document.getElementById('{{{DataEmissao}}}{{IdPagamento}}').innerText = '' + (new Date('{{{DataEmissao}}}').getUTCMonth() + 1);
+                          </script>
+                        </td>
+                        <td>
+                          {{{DataEmissao}}}
+                        </td>
+                        <td>
+                          {{DataVencimento}}
+                        </td>
+                        <td class="text-right" id='{{IdPagamento}}'>
+                          <Script>  
+                              let cor{{IdPagamento}} ='';
+                              let texto{{IdPagamento}} = '';
+                              if({{StatusPagamento}} == 1)
+                                {
+                                  cor{{IdPagamento}} = '#28a733b9';
+                                  texto{{IdPagamento}} = 'Pago'
+                                }
+                              else{
+                                  if({{tempoAtraso}} >= 0)
+                                    {
+                                      cor{{IdPagamento}} = '#dc3545';
+                                      texto{{IdPagamento}} = 'Em atraso'
+                                    }else{
+                                      texto{{IdPagamento}} = 'Aguardando Pagamento'
+                                    }
+                                }
+                              this.document.getElementById('{{IdPagamento}}').innerText = texto{{IdPagamento}}
+                              this.document.getElementById('{{DataVencimento}}{{IdPagamento}}').style.backgroundColor = cor{{IdPagamento}};
+                            
+                          </Script>
+                          </td>
+                          </td>          
+                            <td><a href="/usuario/pagamento/boleto/{{Token}}" class="btn btn-outline-primary">Visualizar</a></td>
+                          </tr>
+                          </tr>
+                        {{else}}
+                          <td><h4>Ainda não há pagamentos disponíveis</h4></td>
+          
+                        {{/each}}
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+/* Fim pagamneto.handlebars*/
+
+/* login.handlebars*/
+
+  <div class="panel-header  panel-header-sm"></div>
+<div class="content align-center">        
+          <div class="col-lg-8 -4">
+            <div class="card bg-my-color-2">               
+                    <form class="py-4 form text-light ">
+                        <h3 class="text-lg-center ">Login</h3>
+                        <div class="form-group center-block">
+                            <span><i class="fas fa-envelope  fa-fw"></i></span>
+                            <input type="email" class="input-login" id="email" placeholder="Digite email">
+                        </div>
+                        <div class="form-group ">
+                            <span><i class="fas fa-lock  fa-fw"></i></span>
+                            <input type="password" class="input-login " id="senha" placeholder="Digte senha">
+                            
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" class=" btn-outline-login  rounded-lg shadow-lg ">Login</button>
+                        </div>
+                    </form>                
+            </div>
+        </div>
+</div>
+
+/* Fim login.handlebars*/
+
+/* style.scss */
+
+$my-color-1: #552266;
+$my-color-2: #ff0077;
+$my-color-3: #0022aa;
+$my-color-4: #ffdd00;
+$my-color-5: #dddddd;
+
+$theme-colors:(
+  "my-color-1": $my-color-1,
+  "my-color-2": $my-color-2,
+  "my-color-3": $my-color-3,
+  "my-color-4": $my-color-4,
+  "my-color-5": $my-color-5,
+);
+/*meu codigo pra baixo*/
+.btn-outline-login {
+  color: #fff;
+  border-color: #fff;
+  border: 2px solid #fff;
+  min-width: 35px;
+  width: 45%;
+  max-width: 240px;
+  
+}
+.aligni-center{//tentativa de alinhar o login, sem sucesso
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-login{
+  border-width: 0 0 1px 0;
+  border-color: #fff;
+  background: none;
+  display: inline-block;
+  margin: 20px auto;
+  margin-bottom: 0;  
+  text-align: left;  
+  padding: 14px 10px;
+  width: 66%;
+  outline: none;
+  color: #fff;  
+  transition: 0.25s;
+}
+
+.btn-outline-login:hover {
+  color: var(--my-color-2);
+  background-color: #fff;
+  border-color: #fff;
+}
+    /*Lista de inadiplentes*/
+.list-group-scroll{
+  max-height: 300px;
+  margin-bottom: 10px;
+  overflow: scroll;
+  overflow-x:hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  height: 75%;      
+}
+
+  .card-header-inadi {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: #dc3546b9;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  /* iframe*/
+
+  .iframe{
+    min-height: 480px;
+    height: 100%;
+  }
+
+$body-bg: $my-color-5;
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* Fim style.handlebars*/

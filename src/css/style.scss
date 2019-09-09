@@ -19,6 +19,13 @@ $theme-colors:(
   min-width: 35px;
   width: 45%;
   max-width: 240px;
+  
+}
+.aligni-center{//tentativa de alinhar o login, sem sucesso
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .input-login{
@@ -59,6 +66,20 @@ $theme-colors:(
     background-color: #dc3546b9;
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
   }
+  /* iframe*/
+
+  .iframe{
+    min-height: 480px;
+    height: 100%;
+  }
+ /* icone flutuante*/
+ .icone-flutuante-left{
+	position: absolute;
+	float: top;
+	top: -25px;
+	right: -15px;
+	z-index: 3;
+}
 
 $body-bg: $my-color-5;
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

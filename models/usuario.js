@@ -5,7 +5,7 @@ const db = require('../config/connection')
 async function listar() {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query('SELECT * FROM usuario', (err, rows, fields)=>{
+            db.connection.query('SELECT * FROM USUARIO', (err, rows, fields)=>{
                 resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)
@@ -17,7 +17,7 @@ async function listar() {
 async function listarUm(id) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`SELECT * FROM usuario WHERE IdUsuario='${id}'`, (err, rows, fields)=>{
+            db.connection.query(`SELECT * FROM USUARIO WHERE IDUSUARIO='${id}'`, (err, rows, fields)=>{
                 resolve(JSON.parse(JSON.stringify(rows)))
             })
         }, 80)
@@ -28,7 +28,7 @@ async function listarUm(id) {
 async function adicionar(nome, email, senha, cpf, apartamento) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`INSERT INTO usuario (Nome, Email, Senha, Cpf, Id_Empreendimento) VALUES ('${nome}', '${email}', '${senha}', '${cpf}','${apartamento}')`, (err, result)=>{
+            db.connection.query(`INSERT INTO USUARIO (NOME, EMAIL, SENHA, CPF, ID_EMPREENDIMENTO) VALUES ('${nome}', '${email}', '${senha}', '${cpf}','${apartamento}')`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao cadastrar ${err}`)
                 }
@@ -41,7 +41,7 @@ async function adicionar(nome, email, senha, cpf, apartamento) {
 async function modificar(id, nome, email) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`UPDATE usuario SET Nome="${nome}", Email="${email}" WHERE IdUsuario="${id}"`, (err, result)=>{
+            db.connection.query(`UPDATE USUARIO SET NOME="${nome}", EMAIL="${email}" WHERE IDUSUARIO="${id}"`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao modificar usuário ${err}`)
                 }
@@ -54,7 +54,7 @@ async function modificar(id, nome, email) {
 async function excluir(id) {
     let usuario = new Promise((resolve, reject)=>{
         setTimeout(()=>{
-            db.connection.query(`DELETE ON CASCADE FROM usuario WHERE IdUsuario='${id}'`, (err, result)=>{
+            db.connection.query(`DELETE ON CASCADE FROM USUARIO WHERE IDUSUARIO='${id}'`, (err, result)=>{
                 if(err) {
                     console.log(`erro ao excluir usuário ${err}`)
                 }

@@ -4,7 +4,7 @@ const db = require('../config/connection')
 async function listar() {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query('SELECT * FROM pagamento', (err, rows, fields) => {
+      db.connection.query('SELECT * FROM PAGAMENTO', (err, rows, fields) => {
         resolve(JSON.parse(JSON.stringify(rows)))
       })
     }, 80)
@@ -16,7 +16,7 @@ async function listar() {
 async function listarUm(id) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`SELECT * FROM pagamento WHERE id='${id}'`, (err, rows, fields) => {
+      db.connection.query(`SELECT * FROM PAGAMENTO WHERE ID='${id}'`, (err, rows, fields) => {
         resolve(JSON.parse(JSON.stringify(rows)))
       })
     }, 80)
@@ -27,7 +27,7 @@ async function listarUm(id) {
 async function listarPeloUsuario(id_usuario) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`SELECT *, DATEDIFF( CURDATE(), p.DataVencimento) as 'tempoAtraso' FROM pagamento AS p WHERE Id_Usuario='${id_usuario}'`, (err, rows, fields) => {
+      db.connection.query(`SELECT *, DATEDIFF( CURDATE(), P.DATAVENCIMENTO) AS 'TEMPOATRASO' FROM PAGAMENTO AS P WHERE ID_USUARIO='${id_usuario}';`, (err, rows, fields) => {
         resolve(JSON.parse(JSON.stringify(rows)))
       })
     }, 80)
@@ -39,7 +39,7 @@ async function listarPeloUsuario(id_usuario) {
 async function adicionar(Token, DataEmissao, DataVencimento, StatusPagamento, Id_Usuario, Id_Taxa) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`INSERT INTO pagamento (Token,DataEmissao, DataVencimento,StatusPagamento,Id_Usuario, Id_Taxa) VALUES ('${Token}', '${DataEmissao}', '${DataVencimento}','${StatusPagamento}','${Id_Usuario}','${Id_Taxa}')`, (err, result) => {
+      db.connection.query(`INSERT INTO PAGAMENTO (TOKEN,DATAEMISSAO, DATAVENCIMENTO,STATUSPAGAMENTO,ID_USUARIO, ID_TAXA) VALUES ('${Token}', '${DataEmissao}', '${DataVencimento}','${StatusPagamento}','${Id_Usuario}','${Id_Taxa}')`, (err, result) => {
         if (err) {
           console.log(`erro ao cadastrar ${err}`)
         }
@@ -52,7 +52,7 @@ async function adicionar(Token, DataEmissao, DataVencimento, StatusPagamento, Id
 async function modificar(id, nome, email) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`UPDATE pagamento SET nome="${nome}", email="${email}" WHERE id="${id}"`, (err, result) => {
+      db.connection.query(`UPDATE PAGAMENTO SET NOME="${nome}", EMAIL="${email}" WHERE ID="${id}"`, (err, result) => {
         if (err) {
           console.log(`erro ao modificar pagamento ${err}`)
         }
@@ -65,7 +65,7 @@ async function modificar(id, nome, email) {
 async function excluir(id) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`DELETE FROM pagamento WHERE id='${id}'`, (err, result) => {
+      db.connection.query(`DELETE FROM PAGAMENTO WHERE ID='${id}'`, (err, result) => {
         if (err) {
           console.log(`erro ao excluir pagamento ${err}`)
         }
@@ -78,7 +78,7 @@ async function excluir(id) {
 async function calcular_ano(ano) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`SELECT SUM(VALOR) AS total FROM CONTA WHERE YEAR(DATAEMISSAO) = ${ano}`, (err, rows, fields) => {
+      db.connection.query(`SELECT SUM(VALOR) AS TOTAL FROM CONTA WHERE YEAR(DATAEMISSAO) = ${ano}`, (err, rows, fields) => {
         resolve(JSON.parse(JSON.stringify(rows)))
       })
     }, 80)
@@ -90,17 +90,17 @@ async function calcular_ano(ano) {
 async function calcularAno(ano) {// Modificado para verificar o trimestre e o valor por mês em determinado ano
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      db.connection.query(`SELECT QUARTER(p.DataEmissao)  AS 'trimestre', QUARTER(CURDATE())  AS 'trimestreAtual', 
-      CASE WHEN MONTH(p.DataEmissao) in (1,4,7,10) THEN 0 
-         WHEN MONTH(p.DataEmissao) in (2,5,8,11) THEN 1 
-         WHEN MONTH(p.DataEmissao) in (3,6,9,12) THEN 2 
-         END AS ordemTrimestre,year(p.DataEmissao) as 'ano', month(p.DataEmissao) as 'mes', sum(t.Valor) as 'valor'
-    from Taxa as t
-    join Pagamento as p
-    on t.IdTaxa = p.Id_Taxa
-    where year(p.DataEmissao) = ${ano} and p.statusPagamento = 1
-    group by ano, mes
-    order by ano, mes asc;`, (err, rows, fields) => {
+      db.connection.query(`SELECT QUARTER(P.DATAEMISSAO)  AS 'TRIMESTRE', QUARTER(CURDATE())  AS 'TRIMESTREATUAL', 
+      CASE WHEN MONTH(P.DATAEMISSAO) in (1,4,7,10) THEN 0 
+         WHEN MONTH(P.DATAEMISSAO) in (2,5,8,11) THEN 1 
+         WHEN MONTH(P.DATAEMISSAO) in (3,6,9,12) THEN 2 
+         END AS ORDEMTRIMESTRE,YEAR(P.DATAEMISSAO) AS 'ANO', MONTH(P.DATAEMISSAO) AS 'MES', SUM(T.VALOR) AS 'VALOR'
+   FROM TAXA AS T
+   JOIN PAGAMENTO AS P
+    ON T.IDTAXA = P.ID_TAXA
+    WHERE YEAR(P.DATAEMISSAO) = ${ano} AND P.STATUSPAGAMENTO = 1
+    GROUP BY TRIMESTRE, TRIMESTREATUAL, ORDEMTRIMESTRE, ANO, MES, VALOR
+    ORDER BY ANO, MES ASC, VALOR;`, (err, rows, fields) => {
           resolve(JSON.parse(JSON.stringify(rows)))
         })
     }, 80)
@@ -113,13 +113,13 @@ async function calcularAno_inadimplente(ano) {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
       
-      db.connection.query(`SELECT year(p.DataVencimento) as 'ano', month(p.DataVencimento) as 'mes', sum(t.Valor) as 'valor'
-      from Taxa as t
-      join Pagamento as p
-      on t.idTaxa = p.Id_Taxa
-      where year(p.DataVencimento) = ${ano} and p.StatusPagamento = 0
-      group by ano, mes
-      order by ano, mes asc;`, (err, rows, fields) => {
+      db.connection.query(`SELECT YEAR(P.DATAVENCIMENTO) AS 'ANO', MONTH(P.DATAVENCIMENTO) AS 'MES', SUM(T.VALOR) AS 'VALOR'
+      FROM TAXA AS T
+      JOIN PAGAMENTO AS P
+      ON T.IDTAXA = P.ID_TAXA
+      WHERE YEAR(P.DATAVENCIMENTO) = ${ano} AND P.STATUSPAGAMENTO = 0
+      GROUP BY ANO, MES
+    ORDER BY ANO, MES ASC;`, (err, rows, fields) => {
           resolve(JSON.parse(JSON.stringify(rows)))
         })
     }, 80)
@@ -131,13 +131,16 @@ async function calcularAno_inadimplente(ano) {
 async function inadimplente() {
   let pagamento = new Promise((resolve, reject) => {
     setTimeout(() => {
-      // WHERE  p.DataVencimento <= CURDATE() and p.StatusPagamento = 0  MODO CORRETO DE USAR
-      db.connection.query(`SELECT  p.IdPagamento as 'idP', DATEDIFF( CURDATE(), p.DataVencimento) as 'tempoAtraso',u.Nome as 'nome', u.Email as 'email'
-            FROM Usuario AS u
-            JOIN Pagamento AS p
-            ON u.IdUsuario = p.Id_Usuario
-            WHERE  p.DataVencimento >= CURDATE() and p.StatusPagamento = 0           
-            ORDER BY tempoAtraso DESC;`, (err, rows, fields) => {
+      // WHERE  p.DataVencimento <= CURDATE() and P.STATUSPAGAMENTO = 0  MODO CORRETO DE USAR
+      db.connection.query(`SELECT SUM(T.VALOR) AS 'VALOR',U.NOME AS 'NOME', U.EMAIL AS 'EMAIL',  DATEDIFF( CURDATE(), P.DATAVENCIMENTO) AS 'TEMPOATRASO'
+      FROM USUARIO AS U 
+      INNER JOIN PAGAMENTO AS P
+      ON U.IDUSUARIO = P.ID_USUARIO
+      INNER JOIN TAXA AS T 
+      ON T.IDTAXA = P.ID_TAXA
+      WHERE  P.DATAVENCIMENTO >= CURDATE() AND P.STATUSPAGAMENTO = 0
+      GROUP BY  NOME,EMAIL, TEMPOATRASO
+      ORDER BY TEMPOATRASO DESC;`, (err, rows, fields) => {
           resolve(JSON.parse(JSON.stringify(rows)))
         })
     }, 80)

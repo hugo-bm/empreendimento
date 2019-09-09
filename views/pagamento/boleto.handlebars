@@ -1,0 +1,14 @@
+<div class="panel-header panel-header-sm"></div> <!-- Parte escura no inicio do layout pode-se usar como cabeçalho -->
+        
+              {{#each iframe}}
+                <div class="embed-responsive embed-responsive-16by9 iframe">
+                  <iframe class="embed-responsive-item" src='{{{url}}}' allowfullscreen></iframe>
+                </div>
+            {{else}}
+            
+            {{/each}}
+<script>//ativando setinha
+  document.getElementById('setaRetorno').innerHTML = "<i class='fas fa-arrow-left fa-2x' onclick='history.go(-1)'></i>";
+</script>          
+
+

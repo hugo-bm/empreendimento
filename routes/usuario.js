@@ -11,20 +11,25 @@ const boleto = require('./boleto')// temporario
 const path = require('path')
 //Rotas
 router.get('/', (req, res) => {
-    Usuario.listar().then((resultado) => {
-      Empreendimento.listar().then((empreendimento) => {
-        res.render('index', { usuarios: resultado, apartamentos: empreendimento })
-      })
-    }).catch((err) => {
-      console.log(`erro ao listar: ${err}`)
+  Usuario.listar().then((resultado) => {
+    Empreendimento.listar().then((empreendimento) => {
+      res.render('index', { usuarios: resultado, apartamentos: empreendimento })
     })
+  }).catch((err) => {
+    console.log(`erro ao listar: ${err}`)
   })
+})
+router.get('/dashboard/:id',(req,res)=>{
+  Usuario.listarUm(req.params.id).then((resultado)=>{
+    res.render('usuario/dashboard/index',{usuario: resultado})
+  })
+})
 
 // boleto rota
 router.get('/pagamento/:id',(req,res)=>{ // view dos boletos por usuário
-  Usuario.listarUm(req.params.id).then((resultado) => {  
-    Pagamento.listarPeloUsuario(resultado[0].IdUsuario).then((pagamentos)=>{    
-      res.render('pagamento', { usuarios: resultado, boletos: pagamentos })
+  Usuario.listarUm(req.params.id).then((resultado) => {    
+    Pagamento.listarPeloUsuario(resultado[0].IDUSUARIO).then((pagamentos)=>{  
+      res.render('usuario/pagamento', { usuarios: resultado, boletos: pagamentos })
     }).catch((err)=>{
       console.log(`Erro ao carregar os pagamentos: ${err}`)
     })  
@@ -37,13 +42,12 @@ router.get('/pagamento/boleto/remessa', (req,res)=>{
  v()
     async function v(){
     let file =   await boleto.boletoRemessa()
-    console.log(file.path)
     res.render('remessa',{file: file})
   }   
 })
 router.get('/pagamento/boleto/:token',(req,res)=>{// View do boleto por qualquer parte do programa
   let url = [{url:`https://sandbox.boletocloud.com/boleto/2via/${req.params.token}`}];
-  res.render('boleto',{iframe: url})
+  res.render('pagamento/boleto',{iframe: url})
 })
 
 router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um boleto 
@@ -55,9 +59,8 @@ router.post('/pagamento/boleto/', (req,res)=>{ // Requisição para criar um bol
     console.log(`erro ao listar: ${err}`)
   })
   async function v(resultado){
-    let url =  [{url: await boleto.boletoGerar(resultado[0].Nome,resultado[0].Cpf, resultado[0].IdUsuario)}] // nome e cpf/cnpj 
-    console.log(url)
-    res.render('boleto',{iframe: url})
+    let url =  [{url: await boleto.boletoGerar(resultado[0].NOME,resultado[0].CPF, resultado[0].IDUSUARIO)}] // nome e cpf/cnpj 
+    res.render('pagamento/boleto',{iframe: url})
   }   
 })
 
@@ -83,7 +86,7 @@ router.get('/listarUm/:id', (req, res) => {
   
   router.get('/modificar/:id', (req, res) => {
     Usuario.listarUm(req.params.id).then((resultado) => {
-      res.render('modificarUsuario', { usuarios: resultado })
+      res.render('usuario/modificarUsuario', { usuarios: resultado })
     }).catch((err) => {
       console.log(`erro ao listar: ${err}`)
     })

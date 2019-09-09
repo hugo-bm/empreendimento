@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, "src")))
 app.set('views', path.join(__dirname, 'views'))
 
 //Rotas
-
+//
 
 //Instanciando Rotas
 app.use('/usuario', usuario)
